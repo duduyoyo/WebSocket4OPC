@@ -20,6 +20,6 @@ The solution, WebSocket4OPC, is such an exploration. It utilizes WebSocket in II
 .Edge connection ready<br>
 
 <h2>Installation</h2>
-![image](https://user-images.githubusercontent.com/13662339/180008561-4e1b810c-bae4-489f-a222-a3825b5372c9.png)
+<img src="https://user-images.githubusercontent.com/13662339/180008561-4e1b810c-bae4-489f-a222-a3825b5372c9.png" width=30%>
 
 <h2>Usage</h2>
