@@ -24,7 +24,7 @@ The solution, WebSocket4OPC, is such an exploration. It utilizes WebSocket in II
 <h3>Pre-requiste</h3>
 1. This module must be installed in the same box of OPC DA/AE Server<br>
 2. WebSocket feature for IIS must be enabled in advance<br>
-3. Microsoft VC++ Runtim Library for X64 required (download and install https://aka.ms/vs/17/release/vc_redist.x64.exe)<br>
+3. Microsoft VC++ Runtim Library for X64 required (download <a href="https://aka.ms/vs/17/release/vc_redist.x64.exe">here</a> and install it)<br>
  
 
 <h2>Usage</h2>
