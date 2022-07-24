@@ -19,19 +19,21 @@ The solution, WebSocket4OPC, is such an exploration. It utilizes WebSocket in II
 .No firewall configuration required<br>
 .Edge connection ready<br>
 
-<h2>Installation</h2>
-<img src="https://user-images.githubusercontent.com/13662339/180008561-4e1b810c-bae4-489f-a222-a3825b5372c9.png" width=30%>
-<h3>Pre-requiste</h3>
+<h2>Pre-requiste</h2>
 1. Installation need be done in the same box of OPC DA/AE Server<br>
 2. WebSocket feature for IIS need be enabled first<br>
 3. Microsoft VC++ Runtim for X64 required (download <a href="https://aka.ms/vs/17/release/vc_redist.x64.exe">here</a> and install)<br>
- 
-To install, launch command line with administrator privilege. Go to folder where module is downloaded. Run command "install.bat myAccount myPassword". This credential will be used for app pool.
 
+<h2>Installation</h2>
+
+To install, launch command line with administrator privilege. Go to folder where module is downloaded. Run command "install.bat myAccount myPassword". This credential will be used for app pool configuration.
+
+To verify, launch browser (Chrome/Safari/Edge) and enter URL "http://localhost/OPC/websocket.html"<p>
+<img src="https://user-images.githubusercontent.com/13662339/180631724-758611da-0cb2-4e24-baa3-98663d3a552e.png" width=70%>
+
+<h2>Uninstallation</h2>
 To uninstall, simply run command "uninstall.bat" in command line.
-
-To verify, launch browser (Chrome/Safari/Edge) and enter URL "http://localhost/OPC/websocket.html".
 
 <h2>Usage</h2>
 
-<h2>Screen shots</h2>
+<h2>Screen shots of outputs for sample codes</h2>
