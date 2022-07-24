@@ -34,13 +34,12 @@ To verify, launch browser (Chrome/Safari/Edge) and enter URL "http://localhost/O
 <h2>Uninstallation</h2>
 To uninstall, simply run command "uninstall.bat" in command line.
 
-<h2>Usage</h2>
-All usages are availabe by typing ? in textbox above.<br>
-1. Browse<br>
-2. Subscribe DA<br>
-3. Unsubscribe DA<br>
-4. Subscribe AE<br>
-5. Unsubscribe AE<br>
-6. Help<br>
+<h2>Usage</h2><p>
+1. Browse<p>
+2. Subscribe DA<p>
+3. Unsubscribe DA<p>
+4. Subscribe AE<p>
+5. Unsubscribe AE<p>
+6. Help<p>
 
 <h2>Screen shots of outputs for sample codes</h2>
