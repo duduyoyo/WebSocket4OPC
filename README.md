@@ -35,7 +35,14 @@ To verify, launch browser (Chrome/Safari/Edge) and enter URL "http://localhost/O
 To uninstall, simply run command "uninstall.bat" in command line.
 
 <h2>Usage</h2><p>
+  Quoted text as below is command sent to OPC server.<p>
+    
 1. Browse<p>
+   "browse" - show all children tags under top level<p>
+   "browse:tagID" - show all children tags for a specific tag<p>
+    "browse:tagID countsInPagenation pagenationNumber" - show counted children tags in a pagenation for a specific tag. For example there is 10,000 children tags under a tag and command "browse: tagID 2000 2" will display 2000 children tags rank from 2000 to 3999<p>
+    JSON return [{"n": "tagName1", "i": "tagID1", "b": 1}, {"n": "tagName2", "i": "tagID2", "b": 0}, ...] (n - name, i - ID, b - branch)<br>
+  
 2. Subscribe DA<p>
 3. Unsubscribe DA<p>
 4. Subscribe AE<p>
