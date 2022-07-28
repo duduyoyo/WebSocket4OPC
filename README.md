@@ -26,13 +26,13 @@ The solution, WebSocket4OPC, is such an exploration. It utilizes WebSocket in II
 
 <h2>Installation</h2>
 
-To install, launch command line with administrator privilege. Go to folder where module is downloaded. Run command "install.bat myAccount myPassword". This credential will be used for app pool configuration.
+To install, launch command line with administrator privilege. Download all files from server folder to a local one and enter to it from command line. Run command "install.bat myAccount myPassword". This credential will be used in app pool configuration.
 
 To verify, launch browser (Chrome/Safari/Edge) and enter URL "http://localhost/OPC/websocket.html"<p>
 <img src="https://user-images.githubusercontent.com/13662339/180631724-758611da-0cb2-4e24-baa3-98663d3a552e.png" width=70%>
 
 <h2>Uninstallation</h2>
-To uninstall, simply run command "uninstall.bat" in command line.
+To uninstall, simply run command "uninstall.bat" in command line from downloaded folder.
 
 <h2>Usage</h2><p>
       
@@ -59,7 +59,16 @@ To uninstall, simply run command "uninstall.bat" in command line.
    "subscribeAE" - Receive notification on alarms and events<p>
 
    JOSN return {"AE":[{"s":"tagName1","m":"tagName1 Deviation is Low","c":"DEVIATION","sc":"LO","t":1643760803000,"q":192,"tp":4,"ec":2,"st":200,"a":1,"at":""}, {"s":"tagName2","m":"tagName2 Limit is Normal","c":"PVLEVEL","sc":"HIHI","t":1643760808000,"q":192,"tp":4,"ec":1,"st":500,"a":1,"at":""}]} (s - source, m - message, c - condition, sc - sub condition, t - time stamp, q - quality, tp - type, ec - category, st - severity, a - acknowledgement, at - actor<p>
+   When a "subscribeAE" command is sent response will be like,<p>
+   <img src="https://user-images.githubusercontent.com/13662339/181421428-078ece71-b514-4e99-99bb-5e2fcb934f3b.png" width=70%>
+         
 5. Unsubscribe AE<p>
-6. Help<p>
-
+   "unsubscribeAE" - Remove notification on alarms and events<p>
+         
+6. Disconnect<p>
+   "disconnect" - Close connection with server<p>
+         
+7. Help<p>
+   "help" or "?" - Display all supported commands and usages<p>
+         
 <h2>Screen shots of outputs for sample codes</h2>
