@@ -1,20 +1,20 @@
 # WebSocket4OPC
 Enable WebSocket in OPC DA/AE Server with JSON return, first time ever
 
-DCOM was developed more than 2 decades ago and that was the technology classic OPC started with. Young kids get out of school with dynamic languages on hand. They care about writing a few line scripts to bring data back rather than knowing how it happens under hood, and it is anti-intuitive to get their feet wet on this legacy. With the adoption of WebSocket everywhere it is time to introspect how to combine this new technology with old DCOM.
-The solution, WebSocket4OPC, is such an exploration. It utilizes WebSocket in IIS to communicate with OPC server and wraps all dirty work in simple JSON return. This solution gets rid of DCOM completely since IIS and OPC servers are hosted in the same one. 
+DCOM was developed more than 2 decades ago, wich was the technology classic OPC adopted. Young kids out of school enjoy dynamical languages (JavaScript/Python etc) since they are simple and straightforward. They are reluctunt to get their feet wet on this legacy technology. So it is OPC veteran's responsibility to bridge the gap. But how? With the introduction of WebSocket in main languages, WebSocket makes it possible as a glue to combine dynamical languages and legacy DCOM together.
+The solution, WebSocket4OPC, is such an exploration. It utilizes WebSocket as network transportation between various clients and OPC server. All dirty work are wrapped in server so clients enjoy simple JSON return. No DCOM to deal with in having OPC data, period! 
 
 <h2>Benefits</h2>
 
-.No DCOM required to connect a classic OPC server, period<br>
-.Dynamical languages (JavaScript, Python etc.) support<br>
-.Return in JSON format<br>
-.Intuitive and streamlined commands instead of long and difficult RESTful API<br>
-.No worry about future DCOM vulnerability any more<br>
+.No DCOM required to connect a classic OPC server<br>
+.Dynamical languages (JavaScript/Python etc) supportted<br>
+.JSON Return<br>
+.Intuitive and easy commands instead of long REST API<br>
+.No future DCOM vulnerability any more<br>
 .Account authentication available<br>
 .Secure connection available<br>
 .Native mobile application made feasible<br>
-.No thousand-page OPC UA document to read<br>
+.No thousand-page OPC UA documents to go through<br>
 .No OPC UA certificate configuration required<br>
 .No firewall configuration required<br>
 .Edge connection ready<br>
@@ -26,13 +26,13 @@ The solution, WebSocket4OPC, is such an exploration. It utilizes WebSocket in II
 
 <h2>Installation</h2>
 
-To install, launch command line with administrator privilege. Download all files from server folder to a local one and enter to it from command line. Run command "install.bat myAccount myPassword". This credential will be used in app pool configuration.
+Download all files from server folder to a local one. Launch a command line with administrator privilege and enter to local folder. Run command "install.bat myAccount myPassword" to complete installation.
 
 To verify, launch browser (Chrome/Safari/Edge) and enter URL "http://localhost/OPC/websocket.html"<p>
 <img src="https://user-images.githubusercontent.com/13662339/180631724-758611da-0cb2-4e24-baa3-98663d3a552e.png" width=70%>
 
 <h2>Uninstallation</h2>
-To uninstall, simply run command "uninstall.bat" in command line from downloaded folder.
+Run command "uninstall.bat" in command line from the same local folder.
 
 <h2>Usage</h2><p>
       
