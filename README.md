@@ -1,8 +1,8 @@
 # WebSocket4OPC
 Enable WebSocket in OPC DA/AE Server with JSON return, first time ever
 
-DCOM was developed more than 2 decades ago, wich was the technology classic OPC adopted. Young kids out of school enjoy dynamical languages (JavaScript/Python etc) since they are simple and straightforward. They are reluctunt to get their feet wet on this legacy technology. So it is OPC veteran's responsibility to bridge the gap. But how? With the introduction of WebSocket in main languages, WebSocket makes it possible as a glue to combine dynamical languages and legacy DCOM together.<br>
-The solution, WebSocket4OPC, is such a pioneer. It utilizes WebSocket as network transportation between various clients and OPC server. All dirty work are wrapped in a native module in server so clients can benefit from simple JSON return. No DCOM to deal with in having OPC data, period! 
+DCOM was developed more than 2 decades ago, wich was the technology classic OPC adopted. Young kids out of school enjoy dynamical languages (JavaScript/Python etc) since they are simple and straightforward. They are reluctunt to get their feet wet on this legacy technology. So it is OPC veteran's responsibility to bridge the gap. But how? With the introduction of WebSocket in main languages, WebSocket makes it possible as a glue to combine dynamical languages and legacy DCOM together.<p>
+The solution, WebSocket4OPC, is such a pioneer. It utilizes WebSocket as network transportation between various clients and OPC server. All dirty work are wrapped in a native module in server side so all kinds of clients can benefit from simple JSON return. No DCOM to deal with in classic OPC any more, period! 
 
 <h2>Benefits</h2>
 
@@ -71,4 +71,8 @@ Run command "uninstall.bat" in command line from the same local folder.
 7. Help<p>
    "help" or "?" - Display all supported commands and usages<p>
          
-<h2>Screen shots of outputs for sample codes</h2>
+<h2>Screen shots from all kinds of clients' outputs</h2>
+<h4>Python</h4>
+<h4>C#</h4>
+<h4>C/C++</h4>
+<h4>Java</h4>
