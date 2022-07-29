@@ -71,7 +71,7 @@ Run command "uninstall.bat" in command line from the same local folder.
 7. Help<p>
    "help" or "?" - Display all supported commands and usages<p>
          
-<h2>Sample codes' outputs</h2>
+<h2>Sample code output</h2>
 Sample codes for different languages (Python/C#/C++/Java) are available in client folder<br>
 
 <h4>Python</h4>
@@ -85,3 +85,8 @@ Sample codes for different languages (Python/C#/C++/Java) are available in clien
 
 <h4>Java</h4>
 <img src="https://user-images.githubusercontent.com/13662339/181853551-1bf4f9e4-103b-43f5-b856-8b7dec7f9938.png" width=70%>
+
+<h2>Roadmap</h2>
+- Read/write feature in DA upon request
+- HDA feature upon request
+- Full-fledged open source native client for iOS
