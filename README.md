@@ -87,6 +87,6 @@ Sample codes for different languages (Python/C#/C++/Java) are available in clien
 <img src="https://user-images.githubusercontent.com/13662339/181853551-1bf4f9e4-103b-43f5-b856-8b7dec7f9938.png" width=70%>
 
 <h2>Roadmap</h2>
-- Read/write feature in DA upon request
-- HDA feature upon request
-- Full-fledged open source native client for iOS
+- Read/write feature in DA upon request<br>
+- HDA feature upon request<br>
+- Full-fledged open source native client for iOS<br>
