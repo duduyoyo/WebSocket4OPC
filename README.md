@@ -1,8 +1,8 @@
 # WebSocket4OPC
 Enable WebSocket in OPC DA/AE Server with JSON return, first time ever
 
-DCOM was developed more than 2 decades ago, wich was the technology classic OPC adopted. Young kids out of school enjoy dynamical languages (JavaScript/Python etc) since they are simple and straightforward. They are reluctunt to get their feet wet on this legacy technology. So it is OPC veteran's responsibility to bridge the gap. But how? With the introduction of WebSocket in main languages, WebSocket makes it possible as a glue to combine dynamical languages and legacy DCOM together.<p>
-The solution, WebSocket4OPC, is such a pioneer. It utilizes WebSocket as network transportation between various clients and OPC server. All dirty work are wrapped in a native module in server side so all kinds of clients can benefit from simple JSON return. No DCOM to deal with in classic OPC any more, period! 
+DCOM was developed more than 2 decades ago, wich was the pillar in classic OPC. Young kids out of school love dynamical languages (JavaScript/Python etc) since they are simple and straightforward. They are reluctunt to get their feet wet on this legacy technology. So it is OPC veteran's responsibility to bridge the gap. With the introduction of WebSocket in all popular languages, WebSocket makes it possible to glue dynamical languages and legacy DCOM together.<p>
+The solution, WebSocket4OPC, is such a pioneer. It utilizes WebSocket as network transportation between different kinds of clients and OPC server. All dirty work are handled by a native module in server side so clients can simply benefit from simple JSON return. No DCOM to deal with in classic OPC any more, period! 
 
 <h2>Benefits</h2>
 
@@ -71,8 +71,17 @@ Run command "uninstall.bat" in command line from the same local folder.
 7. Help<p>
    "help" or "?" - Display all supported commands and usages<p>
          
-<h2>Screen shots from all kinds of clients' outputs</h2>
+<h2>Sample codes' outputs</h2>
+Sample codes for different languages (Python/C#/C++/Java) are available in client folder<br>
+
 <h4>Python</h4>
+<img src="https://user-images.githubusercontent.com/13662339/181852043-03793d2e-78de-45bb-96d6-f3e5255501c4.png" width=70%>
+
 <h4>C#</h4>
-<h4>C/C++</h4>
+<img src="https://user-images.githubusercontent.com/13662339/181852448-7b059383-01dc-4b9f-b095-6d551b1f591f.png" width=70%>
+
+<h4>C++</h4>
+<img src="https://user-images.githubusercontent.com/13662339/181853113-1b51114d-3318-41e9-b847-01d7bc3ceb61.png" width=70%>
+
 <h4>Java</h4>
+<img src="https://user-images.githubusercontent.com/13662339/181853551-1bf4f9e4-103b-43f5-b856-8b7dec7f9938.png" width=70%>
