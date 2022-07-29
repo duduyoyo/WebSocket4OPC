@@ -1,8 +1,8 @@
 # WebSocket4OPC
 Enable WebSocket in OPC DA/AE Server with JSON return, first time ever
 
-DCOM was developed more than 2 decades ago, wich was the technology classic OPC adopted. Young kids out of school enjoy dynamical languages (JavaScript/Python etc) since they are simple and straightforward. They are reluctunt to get their feet wet on this legacy technology. So it is OPC veteran's responsibility to bridge the gap. But how? With the introduction of WebSocket in main languages, WebSocket makes it possible as a glue to combine dynamical languages and legacy DCOM together.
-The solution, WebSocket4OPC, is such an exploration. It utilizes WebSocket as network transportation between various clients and OPC server. All dirty work are wrapped in server so clients enjoy simple JSON return. No DCOM to deal with in having OPC data, period! 
+DCOM was developed more than 2 decades ago, wich was the technology classic OPC adopted. Young kids out of school enjoy dynamical languages (JavaScript/Python etc) since they are simple and straightforward. They are reluctunt to get their feet wet on this legacy technology. So it is OPC veteran's responsibility to bridge the gap. But how? With the introduction of WebSocket in main languages, WebSocket makes it possible as a glue to combine dynamical languages and legacy DCOM together.<br>
+The solution, WebSocket4OPC, is such a pioneer. It utilizes WebSocket as network transportation between various clients and OPC server. All dirty work are wrapped in a native module in server so clients can benefit from simple JSON return. No DCOM to deal with in having OPC data, period! 
 
 <h2>Benefits</h2>
 
@@ -47,7 +47,7 @@ Run command "uninstall.bat" in command line from the same local folder.
 2. Subscribe DA<p>
    "subscribe: tagID1, tagID2, ..." - Add monitored tags to DA server and receive notification when values change<p>
 
-   JOSN return {"DA":[{"i": "tagID1", "v": "20.308", "t": 1643759756000, "q": 192}, {"i": "tagID2", "v": "4", "t": 1643759756230, "q": 192}, ...]} (i - ID, v - value, t - time stamp, q - quality)<p>
+   JOSN return {"DA":[{"i": "tagID1", "v": "20.308", "t": 1643759756000, "q": 192}, {"i": "tagID2", "v": "4", "t": 1643759756230, "q": 192}, ...]}<br>(i - ID, v - value, t - time stamp, q - quality)<p>
    When a "subscribe: Random.Int1" command is sent response will be like,<p>
    <img src="https://user-images.githubusercontent.com/13662339/181158809-677901af-283f-4166-81fe-8c5d368f972f.png" width=70%>
          
@@ -58,7 +58,7 @@ Run command "uninstall.bat" in command line from the same local folder.
 4. Subscribe AE<p>
    "subscribeAE" - Receive notification on alarms and events<p>
 
-   JOSN return {"AE":[{"s":"tagName1","m":"tagName1 Deviation is Low","c":"DEVIATION","sc":"LO","t":1643760803000,"q":192,"tp":4,"ec":2,"st":200,"a":1,"at":""}, {"s":"tagName2","m":"tagName2 Limit is Normal","c":"PVLEVEL","sc":"HIHI","t":1643760808000,"q":192,"tp":4,"ec":1,"st":500,"a":1,"at":""}]} (s - source, m - message, c - condition, sc - sub condition, t - time stamp, q - quality, tp - type, ec - category, st - severity, a - acknowledgement, at - actor<p>
+   JOSN return {"AE":[{"s":"tagName1","m":"tagName1 Deviation is Low","c":"DEVIATION","sc":"LO","t":1643760803000,"q":192,"tp":4,"ec":2,"st":200,"a":1,"at":""}, {"s":"tagName2","m":"tagName2 Limit is Normal","c":"PVLEVEL","sc":"HIHI","t":1643760808000,"q":192,"tp":4,"ec":1,"st":500,"a":1,"at":""}]}<br>(s - source, m - message, c - condition, sc - sub condition, t - time stamp, q - quality, tp - type, ec - category, st - severity, a - acknowledgement, at - actor)<p>
    When a "subscribeAE" command is sent response will be like,<p>
    <img src="https://user-images.githubusercontent.com/13662339/181421428-078ece71-b514-4e99-99bb-5e2fcb934f3b.png" width=70%>
          
