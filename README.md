@@ -72,10 +72,13 @@ Run command "uninstall.bat" in command line from the same local folder.
    "help" or "?" - Display all supported commands and usages<p>
          
 <h2>Sample code output</h2>
-Sample codes for different languages (Python/C#/C++/Java) are available in client folder<br>
+Sample codes for different languages (Python/Swift/C#/C++/Java) are available in client folder<br>
 
 <h4>Python</h4>
 <img src="https://user-images.githubusercontent.com/13662339/181852043-03793d2e-78de-45bb-96d6-f3e5255501c4.png" width=70%>
+
+<h4>Swift</h4>
+<img src="https://user-images.githubusercontent.com/13662339/182004587-7c5b288a-3955-4689-8c9c-ebe2c81bd4e8.png" width=30%>
 
 <h4>C#</h4>
 <img src="https://user-images.githubusercontent.com/13662339/181852448-7b059383-01dc-4b9f-b095-6d551b1f591f.png" width=70%>
