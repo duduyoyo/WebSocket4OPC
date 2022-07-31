@@ -26,13 +26,13 @@ The solution, WebSocket4OPC, is such a pioneer. It utilizes WebSocket as network
 
 <h2>Installation</h2>
 
-Download all files from server folder to a local one. Launch a command line with administrator privilege and enter to local folder. Run command "install.bat myAccount myPassword" to complete installation.
+Download all files from server folder to a local one. Launch a command line with administrator privilege and enter to local folder. Run command "install.bat userAccount userPassword" to complete installation. userAccount need have administrator privilege.
 
 To verify, launch browser (Chrome/Safari/Edge) and enter URL "http://localhost/OPC/websocket.html"<p>
 <img src="https://user-images.githubusercontent.com/13662339/180631724-758611da-0cb2-4e24-baa3-98663d3a552e.png" width=70%>
 
 <h2>Uninstallation</h2>
-Run command "uninstall.bat" in command line from the same local folder.
+Run command "uninstall.bat" from the same command line location as installation.
 
 <h2>Usage</h2><p>
       
