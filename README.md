@@ -1,8 +1,8 @@
 # WebSocket4OPC
 Enable WebSocket in OPC DA/AE Server with JSON return, first time ever
 
-DCOM was developed more than 2 decades ago, wich was the pillar in classic OPC. Young kids out of school love dynamical languages (JavaScript/Python etc) since they are simple and straightforward. They are reluctunt to get their feet wet on this legacy technology. So it is OPC veteran's responsibility to bridge the gap. With the introduction of WebSocket in all popular languages, WebSocket makes it possible to glue dynamical languages and legacy DCOM together.<p>
-The solution, WebSocket4OPC, is such a pioneer. It utilizes WebSocket as network transportation between different kinds of clients and OPC server. All dirty work are handled by a native module in server side so clients can simply benefit from simple JSON return. No DCOM to deal with in classic OPC any more, period! 
+DCOM was developed more than 2 decades ago, wich was the pillar in classic OPC. Young kids out of school love dynamical languages (JavaScript/Python etc) since they are simple and straightforward. They are reluctunt to get their feet wet on this legacy technology. Luckily with the widespread use of WebSocket in all popular languages, WebSocket makes it possible to glue dynamical languages and legacy DCOM together.<p>
+The solution presented here, WebSocket4OPC, is such a pioneer. It utilizes WebSocket as network transportation between different kinds of clients and classic OPC server. All dirty work are handled in server side so clients can simply benefit from simple JSON return. No DCOM to deal with in classic OPC any more, period! 
 
 <h2>Benefits</h2>
 
@@ -10,37 +10,37 @@ The solution, WebSocket4OPC, is such a pioneer. It utilizes WebSocket as network
 .Dynamical languages (JavaScript/Python etc) supportted<br>
 .JSON Return<br>
 .Intuitive and easy commands instead of long REST API<br>
-.No future DCOM vulnerability any more<br>
+.No future DCOM vulnerability to worry<br>
 .Account authentication available<br>
 .Secure connection available<br>
 .Native mobile application made feasible<br>
-.No thousand-page OPC UA documents to go through<br>
-.No OPC UA certificate configuration required<br>
-.No firewall configuration required<br>
+.No thousand-page OPC UA documents to consult<br>
+.No OPC UA certificate to handle<br>
+.No firewall to set up<br>
 .Edge connection ready<br>
 
 <h2>Pre-requiste</h2>
-1. Installation need be done in the same box of OPC DA/AE Server<br>
-2. WebSocket feature for IIS need be enabled first<br>
+1. Installation need be done in the same box of classic OPC DA/AE Server<br>
+2. WebSocket feature for IIS need be enabled in server box<br>
 3. Microsoft VC++ Runtim for X64 required (download <a href="https://aka.ms/vs/17/release/vc_redist.x64.exe">here</a> and install)<br>
 
 <h2>Installation</h2>
 
-Download all files from server folder to a local one. Launch a command line with administrator privilege and enter to local folder. Run command "install.bat userAccount userPassword" to complete installation. userAccount need have administrator privilege.
+Download all files from server folder to a desired one. Launch a command line with administrator privilege and enter to downloaded folder. Run command "install.bat userAccount userPassword" to complete installation. userAccount need have administrator privilege.
 
 To verify, launch browser (Chrome/Safari/Edge) and enter URL "http://localhost/OPC/websocket.html"<p>
 <img src="https://user-images.githubusercontent.com/13662339/180631724-758611da-0cb2-4e24-baa3-98663d3a552e.png" width=70%>
 
 <h2>Uninstallation</h2>
-Run command "uninstall.bat" from the same command line location as installation.
+Run command "uninstall.bat" in command line with administrator privilege from the downloaded folder to uninstall.
 
 <h2>Usage</h2><p>
       
 1. Browse<p>
    "browse" - Show all children tags under top level<p>
    "browse:tagID" - Show all children tags for a specific tag<p>
-   "browse:tagID -countsInPagenation -pageNumber" - Show counted children tags in a pagenation for a specific tag. For example there is 10,000 children tags under a tag and command "browse: tagID -2000 -3" will display 2000 children tags from 4000th to 5999th<p>
-   JSON return [{"n": "tagName1", "i": "tagID1", "b": 1}, {"n": "tagName2", "i": "tagID2", "b": 0}, ...] (n - name, i - ID, b - branch)<p>
+   "browse:tagID -countsInPagenation -pageNumber" - Show counted children tags in a pagenation for a specific tag. For example there are 10,000 children tags available under a specific tag and command "browse: tagID -2000 -3" will display 2000 children tags from 4000th to 5999th to correspond to page 3<p>
+   JSON return [{"n": "tagName1", "i": "tagID1", "b": 1}, {"n": "tagName2", "i": "tagID2", "b": 0}, ...]<br>(n - name, i - ID, b - branch)<p>
     When a "browse: Random" command is sent response will be like,<p>
    <img src="https://user-images.githubusercontent.com/13662339/180893490-f05edf30-7e4c-4a77-a3a6-df0c03dc12e7.png" width=70%>
 
