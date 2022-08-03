@@ -1,7 +1,7 @@
 # WebSocket4OPC
 Enable WebSocket in OPC DA/AE Server with JSON return, first time ever
 
-DCOM was developed more than 2 decades ago, wich was the pillar in classic OPC. Young kids out of school love dynamical languages (JavaScript/Python etc) since they are simple and straightforward. They are reluctunt to get their feet wet on this legacy technology. Luckily with the widespread adoption of WebSocket in the most popular languages, WebSocket makes it possible to glue dynamical languages and legacy DCOM together.<p>
+DCOM was developed more than 2 decades ago, wich was the pillar of classic OPC. Young kids out of school love dynamical languages (JavaScript/Python etc) since they are simple and straightforward. They are reluctunt to get their feet wet on this legacy technology. Luckily with the wide adoption of WebSocket in most popular languages, WebSocket makes it possible to glue dynamical languages and legacy DCOM together.<p>
 This revolutionary solution, WebSocket4OPC, brings unparalleled experience to your desktop or mobile device. It utilizes WebSocket as network transportation between quite a few different clients and classic OPC server. Meanwhile it has equipped all required features to make sure OPC data can be accessed through Internet safely and securely. Remember - all these are achieved without using DCOM, period! 
 
 <h2>Benefits</h2>
