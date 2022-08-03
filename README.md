@@ -2,22 +2,23 @@
 Enable WebSocket in OPC DA/AE Server with JSON return, first time ever
 
 DCOM was developed more than 2 decades ago, wich was the pillar in classic OPC. Young kids out of school love dynamical languages (JavaScript/Python etc) since they are simple and straightforward. They are reluctunt to get their feet wet on this legacy technology. Luckily with the widespread adoption of WebSocket in the most popular languages, WebSocket makes it possible to glue dynamical languages and legacy DCOM together.<p>
-The solution presented here, WebSocket4OPC, is such a pioneer. It utilizes WebSocket as network transportation between different kinds of clients and classic OPC server. All dirty work are handled in server side so clients can simply benefit from simple JSON return. No DCOM to deal with in classic OPC any more, period! 
+This revolutionary solution, WebSocket4OPC, brings unparalleled experience to your desktop or mobile device. It utilizes WebSocket as network transportation between quite a few different clients and classic OPC server. Meanwhile it has equipped all required features to make sure OPC data can be accessed through Internet safely and securely. Remember - all these are achieved without using DCOM, period! 
 
 <h2>Benefits</h2>
 
-.No DCOM required to connect a classic OPC server<br>
-.Dynamical languages (JavaScript/Python etc) supportted<br>
-.JSON Return<br>
-.Intuitive and easy commands instead of long REST API<br>
+.No DCOM when connecting to a classic OPC server<br>
+.Support dynamical languages (JavaScript/Python etc)<br>
+.Return in standard JSON format<br>
+.Intuitive and easy-to-remember commands instead of long REST API<br>
 .No future DCOM vulnerability to worry<br>
 .Account authentication available<br>
 .Secure connection available<br>
-.Native mobile application made feasible<br>
-.No thousand-page OPC UA documents to consult<br>
-.No OPC UA certificate to handle<br>
-.No firewall to set up<br>
-.Edge connection ready<br>
+.Native mobile APP made feasible<br>
+.No tedious thousand-page long OPC UA documents to read<br>
+.No OPC UA certificate configuration handle<br>
+.No OPC UA firewall configuration<br>
+.Edge connection ready<br> 
+.Gateway-use ready<br>
 
 <h2>Pre-requiste</h2>
 1. Installation need be done in the same box of classic OPC DA/AE Server<br>
