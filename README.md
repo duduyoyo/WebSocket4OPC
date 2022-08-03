@@ -17,8 +17,7 @@ This revolutionary solution, WebSocket4OPC, brings unparalleled experience to yo
 .No tedious thousand-page long OPC UA documents to read<br>
 .No OPC UA certificate configuration handle<br>
 .No OPC UA firewall configuration<br>
-.Edge connection ready<br> 
-.Gateway-use ready<br>
+.Edge or Gateway deployment ready<br> 
 
 <h2>Pre-requiste</h2>
 1. Installation need be done in the same box of classic OPC DA/AE Server<br>
