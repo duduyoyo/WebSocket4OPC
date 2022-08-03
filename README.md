@@ -14,7 +14,7 @@ This revolutionary solution, WebSocket4OPC, brings unparalleled experience to yo
 .Account authentication available<br>
 .Secure connection available<br>
 .Native mobile APP made feasible<br>
-.No tedious thousand-page long OPC UA documents to read<br>
+.No tedious thousand-page OPC UA documents to read<br>
 .No OPC UA certificate configuration handle<br>
 .No OPC UA firewall configuration<br>
 .Edge or Gateway deployment ready<br> 
