@@ -103,7 +103,7 @@ int __cdecl wmain()
         if (dwBufferLength == 0)
         {
             dwError = ERROR_NOT_ENOUGH_MEMORY;
-			break;
+	    break;
         }
 
 	dwError = WinHttpWebSocketReceive(hWebSocketHandle, rgbBuffer, dwBufferLength, &dwBytesTransferred, &eBufferType);
