@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Enable WebSocket for OPC, first time ever</title>
+</head>
+<script language="javascript" type="text/javascript">
+
+    var wsUri = 'ws://'+location.hostname+'/OPC/main.opc';
+
+    var output;
+
+    function init() {
+        var input = document.getElementById("messageId");
+
+        input.addEventListener("keyup", function (event) {            
+            if (event.keyCode === 13) {
+                event.preventDefault();
+                document.getElementById("sendId").click();
+            }
+        });
+
+        output = document.getElementById("output");
+        startWebSocket();
+    }
+
+    function startWebSocket() {
+        websocket = new WebSocket(wsUri);
+
+        websocket.onclose = function (evt) { onClose(evt) };
+        websocket.onmessage = function (evt) { onMessage(evt) };
+        websocket.onerror = function (evt) { onError(evt) };
+    }
+
+    function onClose(evt) {
+        writeToScreen("DISCONNECTED");
+    }
+
+    function onMessage(evt) {
+        writeToScreen('<span style="color: red; white-space: pre-line;">' + evt.data + '</span>');
+    }
+
+    function endChannel() {
+        websocket.close();
+    }
+
+    function onError(evt) {
+        writeToScreen('<span style="color: red;">ERROR:</span> ' + evt.data);
+    }
+
+    function doSend(message) {
+        writeToScreen("SENT: " + message);
+        websocket.send(message);
+    }
+
+    function writeToScreen(message) {
+        output.innerHTML = message;
+    }
+
+    window.addEventListener("load", init, false);
+
+</script>
+
+<h2>DCOM-free solution to access OPC data in JavaScript/Python and JSON return</h2>
+
+<div id="output"></div>
+
+<body>
+    <p>
+	<input type="text" id="messageId">&nbsp;&nbsp;<label>(type a command or ? to get help)</label>
+    </p>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button id="sendId" onclick="doSend(getElementById('messageId').value);getElementById('messageId').value=''">Send</button>&nbsp;&nbsp;&nbsp;&nbsp;<button onclick="endChannel()">End</button>
+</body>
+</html>          
