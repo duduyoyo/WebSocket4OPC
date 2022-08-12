@@ -26,7 +26,7 @@ This revolutionary solution, WebSocket4OPC, brings unparalleled experience to yo
 
 <h2>Installation</h2>
 
-Download all files from server folder to a desired one. Launch a command line with administrator privilege and enter to downloaded folder. Run command "install.bat userAccount userPassword" to complete installation. userAccount need have administrator privilege.
+Download all files from server folder to a desired one. Launch a command line with administrator privilege and enter to downloaded folder. Run command "install.bat userAccount userPassword" to complete installation. userAccount/userPassword need be replaced with your own Windows account/password and make sure account has administrator privilege.
 
 To verify, launch browser (Chrome/Safari/Edge) and enter URL "http://localhost/OPC/websocket.html"<p>
 <img src="https://user-images.githubusercontent.com/13662339/180631724-758611da-0cb2-4e24-baa3-98663d3a552e.png" width=70%>
