@@ -79,7 +79,7 @@ Sample codes for different languages (Python/Swift/C#/C++/Java) are available in
 <img src="https://user-images.githubusercontent.com/13662339/186769067-cea10fad-f82d-4cb1-8e34-efc753e3cd39.png" width=70%>
 
 <h4>Swift</h4>
-<img src="https://user-images.githubusercontent.com/13662339/182004587-7c5b288a-3955-4689-8c9c-ebe2c81bd4e8.png" width=30%>
+<img src="https://user-images.githubusercontent.com/13662339/186776595-4d9156e5-d04e-48a6-8861-b43bd14116df.png" width=30%>
 
 <h4>C#</h4>
 <img src="https://user-images.githubusercontent.com/13662339/186769842-1bbff995-53f5-42c5-a6b8-526d35fc3fed.png" width=70%>
