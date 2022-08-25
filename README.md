@@ -47,10 +47,11 @@ Run command "uninstall.bat" in command line with administrator privilege from th
 2. Subscribe DA<p>
    "subscribe: tagID1, tagID2, ..." - Add monitored tags to DA server and receive notification when values change<p>
 
-   JOSN return {"DA":[{"i": "tagID1", "v": "20.308", "t": 1643759756000, "q": 192}, {"i": "tagID2", "v": "4", "t": 1643759756230, "q": 192}, ...]}<br>(i - ID, v - value, t - time stamp, q - quality)<p>
+   JOSN return {"DA":[{"i": "tagID1", "v": "20.308", "t": 1643759756, "q": 192}, {"i": "tagID2", "v": "4", "t": 1643769859, "q": 192}, ...]}<br>(i - ID, v - value, t - time stamp, q - quality)<p>
    When a "subscribe: Random.Int1" command is sent response will be like,<p>
-   <img src="https://user-images.githubusercontent.com/13662339/181158809-677901af-283f-4166-81fe-8c5d368f972f.png" width=70%>
+   <img src="https://user-images.githubusercontent.com/13662339/186764926-2ab5b662-3b09-4413-a6d9-8e095bac05b2.png" width=70%>
          
+
 3. Unsubscribe DA<p>
    "unsubscribe" - Remove all monitored tags from DA server<p>
    "unsubscribe: tagID1, tagID2, ..." - Remove specific monitored tags from DA server<p>
@@ -58,9 +59,9 @@ Run command "uninstall.bat" in command line with administrator privilege from th
 4. Subscribe AE<p>
    "subscribeAE" - Receive notification on alarms and events<p>
 
-   JOSN return {"AE":[{"s":"tagName1","m":"tagName1 Deviation is Low","c":"DEVIATION","sc":"LO","t":1643760803000,"q":192,"tp":4,"ec":2,"st":200,"a":1,"at":""}, {"s":"tagName2","m":"tagName2 Limit is Normal","c":"PVLEVEL","sc":"HIHI","t":1643760808000,"q":192,"tp":4,"ec":1,"st":500,"a":1,"at":""}]}<br>(s - source, m - message, c - condition, sc - sub condition, t - time stamp, q - quality, tp - type, ec - category, st - severity, a - acknowledgement, at - actor)<p>
+   JOSN return {"AE":[{"s":"tagName1","m":"tagName1 Deviation is Low","c":"DEVIATION","sc":"LO","t":1643760803,"q":192,"tp":4,"ec":2,"st":200,"a":1,"at":""}, {"s":"tagName2","m":"tagName2 Limit is Normal","c":"PVLEVEL","sc":"HIHI","t":1643760808,"q":192,"tp":4,"ec":1,"st":500,"a":1,"at":""}]}<br>(s - source, m - message, c - condition, sc - sub condition, t - time stamp, q - quality, tp - type, ec - category, st - severity, a - acknowledgement, at - actor)<p>
    When a "subscribeAE" command is sent response will be like,<p>
-   <img src="https://user-images.githubusercontent.com/13662339/181421428-078ece71-b514-4e99-99bb-5e2fcb934f3b.png" width=70%>
+   <img src="https://user-images.githubusercontent.com/13662339/186767927-f1747b3b-ff88-4bd2-89ac-bf8414957f3f.png" width=70%>
          
 5. Unsubscribe AE<p>
    "unsubscribeAE" - Remove notification on alarms and events<p>
@@ -75,19 +76,19 @@ Run command "uninstall.bat" in command line with administrator privilege from th
 Sample codes for different languages (Python/Swift/C#/C++/Java) are available in client folder<br>
 
 <h4>Python</h4>
-<img src="https://user-images.githubusercontent.com/13662339/181852043-03793d2e-78de-45bb-96d6-f3e5255501c4.png" width=70%>
+<img src="https://user-images.githubusercontent.com/13662339/186769067-cea10fad-f82d-4cb1-8e34-efc753e3cd39.png" width=70%>
 
 <h4>Swift</h4>
 <img src="https://user-images.githubusercontent.com/13662339/182004587-7c5b288a-3955-4689-8c9c-ebe2c81bd4e8.png" width=30%>
 
 <h4>C#</h4>
-<img src="https://user-images.githubusercontent.com/13662339/181852448-7b059383-01dc-4b9f-b095-6d551b1f591f.png" width=70%>
+<img src="https://user-images.githubusercontent.com/13662339/186769842-1bbff995-53f5-42c5-a6b8-526d35fc3fed.png" width=70%>
 
 <h4>C++</h4>
-<img src="https://user-images.githubusercontent.com/13662339/181853113-1b51114d-3318-41e9-b847-01d7bc3ceb61.png" width=70%>
+<img src="https://user-images.githubusercontent.com/13662339/186770125-a8f25568-3ef4-4147-9548-46961b599755.png" width=70%>
 
 <h4>Java</h4>
-<img src="https://user-images.githubusercontent.com/13662339/181853551-1bf4f9e4-103b-43f5-b856-8b7dec7f9938.png" width=70%>
+<img src="https://user-images.githubusercontent.com/13662339/186770737-ce999cd4-7668-4564-a762-d2f60a779d7e.png" width=70%>
 
 <h2>Roadmap</h2>
 - Read/write feature in DA upon request<br>
