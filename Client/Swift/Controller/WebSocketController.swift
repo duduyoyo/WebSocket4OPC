@@ -1,21 +1,51 @@
 import Foundation
 import SwiftUI
 
+// MARK: - AE
+struct AE: Codable {
+    let ae: [AEItem]
+
+    enum CodingKeys: String, CodingKey {
+        case ae = "AE"
+    }
+}
+
+struct AEItem: Codable, Identifiable {
+    var id : String {s}
+    
+    let s, m, c, sc: String
+    let t, q, tp, ec: Int
+    let st, a: Int
+    let at: String
+    
+    enum CodingKeys: String, CodingKey {
+        case s, m, c, sc,t, q, tp, ec,st, a,at
+    }
+}
+
+// MARK: - DA
 struct DA: Codable {
-    let da: [Da]?
+    let da: [DAItem]
 
     enum CodingKeys: String, CodingKey {
         case da = "DA"
     }
 }
 
-struct Da: Codable {
+struct DAItem: Codable, Identifiable {
+    var id : String {i}
+    
     let i, v: String
     let t, q: Int
+    
+    enum CodingKeys: String, CodingKey {
+        case i,v,t,q
+    }
 }
 
+// MARK: - Servers
 struct OpcServers: Codable {
-    let da, ae: Int?
+    var da, ae: Int?
 
     enum CodingKeys: String, CodingKey {
         case da = "DA"
@@ -23,26 +53,42 @@ struct OpcServers: Codable {
     }
 }
 
-struct Browse: Codable {
+// MARK: - Browse
+struct Browse: Codable, Identifiable {
+    var id : String {i}
+    
     let n, i: String
     let b: Int
+    
+    enum CodingKeys: String, CodingKey {
+        case i,n,b
+    }
 }
 
 class myDelegate: NSObject, URLSessionWebSocketDelegate {
 }
 
 class WebSocketController : ObservableObject {
-    @Published var alertWrapper : [AlertWrapper]
+    @Published var AEResult : [AEItem]
+    @Published var DAResult : [DAItem]
+    @Published var browseResult : [Browse]
+    @Published var isConnected:Bool
+    @Published var isDAsupported:Bool
+    @Published var isAEsupported:Bool
     
     private var session: URLSession
     var socket: URLSessionWebSocketTask!
     
-    init(alertWrapper : [AlertWrapper]){
-        self.alertWrapper = alertWrapper
+    init(DAResult : [DAItem], AEResult : [AEItem], browseResult : [Browse], servers : OpcServers, isConnected:Bool, isDAsupported:Bool, isAEsupported:Bool){
         
-        self.session = URLSession(configuration: .default, delegate:myDelegate(), delegateQueue: OperationQueue())
+        self.DAResult = DAResult
+        self.AEResult = AEResult
+        self.browseResult = browseResult
+        self.isConnected = isConnected
+        self.isDAsupported=isDAsupported
+        self.isAEsupported=isAEsupported
+        self.session = URLSession(configuration: .default, delegate: myDelegate(), delegateQueue: OperationQueue())
         self.connect()
-        
     }
     
     func disconnect() {
@@ -54,15 +100,17 @@ class WebSocketController : ObservableObject {
         self.socket = session.webSocketTask(with: URL(string: "ws://opcServer/OPC/main.opc")!)
         self.listen()
         self.socket.resume()
-        alertWrapper.removeAll()
+        DAResult.removeAll()
+        AEResult.removeAll()
         
         self.socket.send(.string("browse"), completionHandler: { error in
             if let error = error {
                 print("Failed with Error \(error.localizedDescription)")
             } else {
                 sleep(1)
-                self.socket.send(.string("subscribe:Random.Int1")){_ in }
-            }
+                self.socket.send(.string("subscribe:Random.Int1, Random.Int2, Random.Real4, Random.Real8")){_ in }
+                sleep(1)
+                self.socket.send(.string("subscribeAE")){_ in} }
         })
     }
     
@@ -72,7 +120,19 @@ class WebSocketController : ObservableObject {
             guard let self = self else { return }
             switch result {
             case .failure(let error):
-                print(error)
+                if let error = error as NSError? {
+                    print(error.localizedDescription)
+                    if let value = error.userInfo[NSURLErrorFailingURLErrorKey] as! NSURL? {
+                        print(value.absoluteString!)
+                        
+                        DispatchQueue.main.async {
+                            self.isConnected = false
+                            self.isDAsupported = false
+                            self.isAEsupported = false
+                        }
+                    }
+                }
+                self.socket.cancel()
                 return
             case .success(let message):
                 switch message {
@@ -84,19 +144,30 @@ class WebSocketController : ObservableObject {
                         let ae = servers[1].ae
 
                         DispatchQueue.main.async {
-                            self.alertWrapper.append(AlertWrapper(alert:DA(da: nil), servers: OpcServers(da: da, ae: ae), browseResult: nil))
+                            self.isDAsupported = (da != nil)
+                            self.isAEsupported = (ae != nil)
+                            
+                            if da==1 || ae==1 {
+                                self.isConnected = true
+                            }
                         }
                     } else if str.starts(with: "[{\"n"){
                         let browse = try! JSONDecoder().decode([Browse].self, from: jsonData)
 
                         DispatchQueue.main.async {
-                            self.alertWrapper.append(AlertWrapper(alert:DA(da: nil), servers: OpcServers(da: nil, ae: nil), browseResult: browse))
+                            self.browseResult = browse
                         }
                     } else if str.starts(with: "{\"D"){
-                        let da = try! JSONDecoder().decode(DA.self, from: jsonData)
+                        let DAResult = try! JSONDecoder().decode(DA.self, from: jsonData)
 
                         DispatchQueue.main.async {
-                            self.alertWrapper.append(AlertWrapper(alert:da, servers: OpcServers(da: nil, ae: nil), browseResult: nil))
+                            self.DAResult = DAResult.da
+                        }
+                    } else if str.starts(with: "{\"A"){
+                        let AEResult = try! JSONDecoder().decode(AE.self, from: jsonData)
+                        
+                        DispatchQueue.main.async {
+                            self.AEResult = AEResult.ae
                         }
                     }
                     

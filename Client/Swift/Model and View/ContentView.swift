@@ -1,92 +1,119 @@
 import SwiftUI
 
-struct AlertWrapper: Identifiable {
-    let id = UUID()
-    var alert: DA
-    var servers:OpcServers
-    var browseResult:[Browse]?
-}
-
-class ViewModel{
-    var alertWrapper = [AlertWrapper] ()
-}
-
 struct ContentView: View {
     
-    @State var buttonLabel = "Disconnect"
-    var myModel : ViewModel
+    @EnvironmentObject var socket:WebSocketController
     
-    @ObservedObject var controller:WebSocketController
-    
-    init(){
-        myModel = ViewModel()
-        controller = WebSocketController(alertWrapper:myModel.alertWrapper)
+    func browseResult(myAlertWrapper: Browse) -> String {
+        
+        var result = ""
+        
+        if myAlertWrapper.b == 1{
+            result = result+myAlertWrapper.i+" +\n\t"
+        }else{
+            result = result+myAlertWrapper.i+" -\n\t"
+        }
+        return result
     }
     
-    func alertMapped(myAlertWrapper: AlertWrapper) -> String {
-       
-        if myAlertWrapper.alert.da != nil {
-            
-            let timestamp = Double(myAlertWrapper.alert.da![0].t)
-            let date = Date(timeIntervalSince1970: timestamp)
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
-            let time = dateFormatter.string(from: date)
-            
-            return myAlertWrapper.alert.da![0].i+": "+myAlertWrapper.alert.da![0].v+"@"+time
-            
-        } else if myAlertWrapper.servers.da != nil && myAlertWrapper.servers.ae != nil {
-            var result = ""
-            
-            if myAlertWrapper.servers.da == 1 {
-                result = "DA : Available"
-            }else{
-                result = "DA : N/A"
-            }
-            
-            if myAlertWrapper.servers.ae == 1 {
-                result = result + "\t\t\t" + "AE : Available"
-            }else{
-                result = result + "\t\t\t\t" + "AE : N/A"
-            }
-            
-            return result
-            
-        } else if myAlertWrapper.browseResult != nil {
-            var result = "Top\n\t"
-            myAlertWrapper.browseResult!.forEach { browse in
-                
-                if browse.b == 1{
-                    result = result+browse.n+" +\n\t"
-                }else{
-                    result = result+browse.n+" -\n\t"
-                }
-            }
-            return result
-        }
+    func DAMapped(myAlertWrapper: DAItem) -> String {
+        let timestamp = Double(myAlertWrapper.t)
+        let date = Date(timeIntervalSince1970: timestamp)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
+        let time = dateFormatter.string(from: date)
         
-        return "n/a"
+        return myAlertWrapper.i+": "+myAlertWrapper.v+"@"+time
+    }
+    
+    func AEMapped(myAlertWrapper: AEItem) -> String {
+        let timestamp = Double(myAlertWrapper.t)
+        let date = Date(timeIntervalSince1970: timestamp)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
+        let time = dateFormatter.string(from: date)
+        
+        return myAlertWrapper.s+": "+myAlertWrapper.m+" "+myAlertWrapper.c+" "+myAlertWrapper.sc+"@"+time
     }
     
     var body: some View {
         
-        VStack(spacing: 1) {
-            List(controller.alertWrapper){ myAlertWrapper in
-                let result = alertMapped(myAlertWrapper:myAlertWrapper)
-                Text(result)
-            }
-            
-            Divider()
-            
-            Button(buttonLabel, action: {
-                if self.buttonLabel == "Connect" {
-                    self.controller.connect()
-                } else {
-                    self.controller.disconnect()
+        TabView() {
+            VStack(alignment: .leading) {
+               
+                List(socket.DAResult) { myAlertWrapper in
+                    let result = DAMapped(myAlertWrapper:myAlertWrapper)
+                    Text(result)
                 }
-                self.buttonLabel = self.buttonLabel == "Connect" ? "Disconnect" : "Connect"
+            }
+            .padding()
+            .tabItem {
+                Label("DA", systemImage: "tag")
+            }
+            .tag(1)
+            
+            VStack(alignment: .leading) {
+               
+                List(socket.AEResult) { myAlertWrapper in
+                    let result = AEMapped(myAlertWrapper:myAlertWrapper)
+                    Text(result)
+                }
+            }
+            .padding()
+            .tabItem {
+                Label("AE", systemImage: "bell")
+            }
+            .tag(2)
+            
+            Form {
+                Section {
+                    
+                    HStack(alignment: .center) {
+                        Toggle("DA", isOn: Binding(
+                            get: {socket.isDAsupported},
+                            set: { newValue in
+                                socket.isDAsupported=newValue}
+                        ))
+                        .toggleStyle(.button)
+                        .disabled(true)
+                        .tint(.green)
+                        
+                        Toggle("AE", isOn: Binding(
+                            get: {socket.isAEsupported},
+                            set: { newValue in
+                                socket.isAEsupported=newValue}
+                        ))
+                        .toggleStyle(.button)
+                        .disabled(true)
+                        .tint(.green)
+                        
+                        Toggle("", isOn: Binding(
+                            get: {socket.isConnected},
+                            set: { newValue in
+                                socket.isConnected=newValue}
+                        ))
+                        .onChange(of: socket.isConnected) { value in
+                            if value {
+                                self.socket.connect()
+                            } else {
+                                self.socket.disconnect()
+                            }
+                        }
+                    }
+                }
                 
-            }).padding()
+                Section {
+                    List(socket.browseResult) { myAlertWrapper in
+                        let result = browseResult(myAlertWrapper:myAlertWrapper)
+                        Text(result)
+                    }
+                }
+            }
+            .padding()
+            .tabItem {
+                Label("Setting", systemImage: "gearshape")
+            }
+            .tag(3)
         }
     }
 }
