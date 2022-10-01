@@ -9,14 +9,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
    
     // Create the SwiftUI view that provides the window contents.
-      let DAalerts = [DAItem]()
-      let AEalerts = [AEItem]()
-      let browseResult = [Browse]()
-      let servers = OpcServers(da:nil,ae:nil)
-      let connected = false
-      let DAenabled = false
-      let AEenabled = false
-      let contentView = ContentView().environmentObject(WebSocketController(DAResult:DAalerts, AEResult: AEalerts, browseResult:browseResult, servers: servers, isConnected: connected, isDAsupported: DAenabled, isAEsupported: AEenabled))
+
+      let contentView = ContentView()
     
     // Use a UIHostingController as window root view controller.
     if let windowScene = scene as? UIWindowScene {
