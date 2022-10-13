@@ -1,5 +1,5 @@
 # WebSocket4OPC
-Enable WebSocket in OPC DA/AE Server with JSON return, first time ever
+Enable WebSocket in OPC DA/AE/HDA Server with JSON return, first time ever
 
 DCOM was developed more than 2 decades ago, wich was the pillar of classic OPC. Young kids out of school love dynamical languages (JavaScript/Python etc) since they are simple and straightforward. They are reluctunt to get their feet wet on this legacy technology. Luckily with the wide adoption of WebSocket in most popular languages, WebSocket makes it possible to glue dynamical languages and legacy DCOM together.<p>
 This revolutionary solution, WebSocket4OPC, brings unparalleled experience to your desktop or mobile device. It utilizes WebSocket as network transportation between quite a few different clients and classic OPC server. Meanwhile it has equipped all required features to make sure OPC data can be accessed through Internet safely and securely. Remember - all these are achieved without using DCOM, period! 
@@ -26,7 +26,7 @@ This revolutionary solution, WebSocket4OPC, brings unparalleled experience to yo
 
 <h2>Installation</h2>
 
-Download all files from server folder to a desired one. Launch a command line with administrator privilege and enter to downloaded folder. Run command "install.bat userAccount userPassword" to complete installation. userAccount/userPassword need be replaced with your own Windows account/password and make sure account has administrator privilege.
+Download all files from server folder to a desired one. Launch a command line with administrator privilege and enter to downloaded folder. Run command "install.bat userAccount userPassword" to complete installation. userAccount/userPassword need be replaced with your own Windows account/password and make sure account has administrator privilege. If you have previous installation, uninstall it first.
 
 To verify, launch browser (Chrome/Safari/Edge) and enter URL "http://localhost/OPC/websocket.html"<p>
 <img src="https://user-images.githubusercontent.com/13662339/180631724-758611da-0cb2-4e24-baa3-98663d3a552e.png" width=70%>
@@ -47,11 +47,10 @@ Run command "uninstall.bat" in command line with administrator privilege from th
 2. Subscribe DA<p>
    "subscribe: tagID1, tagID2, ..." - Add monitored tags to DA server and receive notification when values change<p>
 
-   JOSN return {"DA":[{"i": "tagID1", "v": "20.308", "t": 1643759756, "q": 192}, {"i": "tagID2", "v": "4", "t": 1643769859, "q": 192}, ...]}<br>(i - ID, v - value, t - time stamp, q - quality)<p>
+   JSON return {"DA":[{"i": "tagID1", "v": "20.308", "t": 1643759756, "q": 192}, {"i": "tagID2", "v": "4", "t": 1643769859, "q": 192}, ...]}<br>(i - ID, v - value, t - time stamp in epoch UTC, q - quality)<p>
    When a "subscribe: Random.Int1" command is sent response will be like,<p>
    <img src="https://user-images.githubusercontent.com/13662339/186764926-2ab5b662-3b09-4413-a6d9-8e095bac05b2.png" width=70%>
          
-
 3. Unsubscribe DA<p>
    "unsubscribe" - Remove all monitored tags from DA server<p>
    "unsubscribe: tagID1, tagID2, ..." - Remove specific monitored tags from DA server<p>
@@ -59,17 +58,24 @@ Run command "uninstall.bat" in command line with administrator privilege from th
 4. Subscribe AE<p>
    "subscribeAE" - Receive notification on alarms and events<p>
 
-   JOSN return {"AE":[{"s":"tagName1","m":"tagName1 Deviation is Low","c":"DEVIATION","sc":"LO","t":1643760803,"q":192,"tp":4,"ec":2,"st":200,"a":1,"at":""}, {"s":"tagName2","m":"tagName2 Limit is Normal","c":"PVLEVEL","sc":"HIHI","t":1643760808,"q":192,"tp":4,"ec":1,"st":500,"a":1,"at":""}]}<br>(s - source, m - message, c - condition, sc - sub condition, t - time stamp, q - quality, tp - type, ec - category, st - severity, a - acknowledgement, at - actor)<p>
+   JSON return {"AE":[{"s":"tagName1","m":"tagName1 Deviation is Low","c":"DEVIATION","sc":"LO","t":1643760803,"q":192,"tp":4,"ec":2,"st":200,"a":1,"at":""}, {"s":"tagName2","m":"tagName2 Limit is Normal","c":"PVLEVEL","sc":"HIHI","t":1643760808,"q":192,"tp":4,"ec":1,"st":500,"a":1,"at":""}]}<br>(s - source, m - message, c - condition, sc - sub condition, t - time stamp, q - quality, tp - type, ec - category, st - severity, a - acknowledgement, at - actor)<p>
    When a "subscribeAE" command is sent response will be like,<p>
    <img src="https://user-images.githubusercontent.com/13662339/186767927-f1747b3b-ff88-4bd2-89ac-bf8414957f3f.png" width=70%>
          
 5. Unsubscribe AE<p>
    "unsubscribeAE" - Remove notification on alarms and events<p>
          
-6. Disconnect<p>
+6. Read history data<p>
+   "readRaw: tagID -startTimeStamp -endTimeStamp" - Read tag history data based on start and end time stamps<p>
+  
+   JSON return {"HDA":{"tagID":[{"v":"24201","t":1665632091,"q":192}, {"v":"19168","t":1665632092,"q":192},...]}}<br>(v - value, t - time stamp in epoch UTC, q - quality)<p>
+   When a "readRaw: Random.Int1 -1665632092 -1665632192" command is sent response will be like,<p>
+   <img src="https://user-images.githubusercontent.com/13662339/195494095-b2bad20e-19e6-4104-a34c-580c0754c1f9.png" width=70%>
+   
+7. Disconnect<p>
    "disconnect" - Close connection with server<p>
          
-7. Help<p>
+8. Help<p>
    "help" or "?" - Display all supported commands and usages<p>
          
 <h2>Sample code output</h2>
