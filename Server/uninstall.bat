@@ -24,6 +24,7 @@ ECHO No physical path %rootPath% found. Check your privilege accessing path %roo
 regsvr32 /s /u %rootPath%\OPC\x64Proxy\opccomn_ps.dll
 regsvr32 /s /u %rootPath%\OPC\x64Proxy\opcproxy.dll
 regsvr32 /s /u %rootPath%\OPC\x64Proxy\opc_aeps.dll
+regsvr32 /s /u %rootPath%\OPC\x64Proxy\opchda_ps.dll
 
 IF exist %rootPath%\OPC (
 rmdir /S /Q %rootPath%\OPC

@@ -55,6 +55,7 @@ GOTO :BLANK
 regsvr32 /s %rootPath%\OPC\x64Proxy\opccomn_ps.dll
 regsvr32 /s %rootPath%\OPC\x64Proxy\opcproxy.dll
 regsvr32 /s %rootPath%\OPC\x64Proxy\opc_aeps.dll
+regsvr32 /s %rootPath%\OPC\x64Proxy\opchda_ps.dll
 
 appcmd add apppool /name:OPCPool
 IF NOT %errorlevel% == 0 (
