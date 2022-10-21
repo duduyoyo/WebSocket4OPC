@@ -1,5 +1,6 @@
 import asyncio
 import websockets
+import time
 
 async def main():
     async with websockets.connect("ws://localhost/OPC/main.opc") as ws:
@@ -9,8 +10,19 @@ async def main():
             print(f"{message}")
 
             if i == 1:
+                print("\nBrowse result:\n")
                 await ws.send("browse")
             elif i == 2:
+                print("\nHDA result:\n")
+                start = time.time() - 120
+                end = time.time()
+                command = "readRaw: Random.Int1 -" + str(start) + " -" + str(end)
+                await ws.send(command)
+            elif i == 3:
+                print("\nAE result:\n")
+                await ws.send("subscribeAE")
+            elif i == 4:
+                print("\nDA result:\n")
                 await ws.send("subscribe: Random.Int1")
             if i == 8:
                 break

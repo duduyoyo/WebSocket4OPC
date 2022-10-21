@@ -1,6 +1,12 @@
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+// PARTICULAR PURPOSE.
+
 #include <Windows.h>
 #include <WinHttp.h>
 #include <stdio.h>
+#include <time.h>
 
 int __cdecl wmain()
 {
@@ -22,7 +28,7 @@ int __cdecl wmain()
     // Create session, connection and request handles.
     //
 
-    hSessionHandle = WinHttpOpen(L"WebSocket sample", WINHTTP_ACCESS_TYPE_DEFAULT_PROXY, NULL, NULL, 0);
+	hSessionHandle = WinHttpOpen(L"WebSocket sample", WINHTTP_ACCESS_TYPE_DEFAULT_PROXY, NULL, NULL, 0);
 
     if (hSessionHandle == NULL)
     {
@@ -30,7 +36,7 @@ int __cdecl wmain()
         goto quit;
     }
 
-    hConnectionHandle = WinHttpConnect(hSessionHandle, L"localhost", INTERNET_DEFAULT_HTTP_PORT, 0);
+	hConnectionHandle = WinHttpConnect(hSessionHandle, L"localhost", INTERNET_DEFAULT_HTTP_PORT, 0);
 
     if (hConnectionHandle == NULL)
     {
@@ -38,7 +44,7 @@ int __cdecl wmain()
         goto quit;
     }
 
-    hRequestHandle = WinHttpOpenRequest(hConnectionHandle, L"GET", L"/OPC/main.opc", NULL, NULL, NULL, 0);
+	hRequestHandle = WinHttpOpenRequest(hConnectionHandle, L"GET", L"/OPC/main.opc", NULL, NULL, NULL, 0);
 
     if (hRequestHandle == NULL)
     {
@@ -51,7 +57,8 @@ int __cdecl wmain()
     //
 #pragma prefast(suppress:6387, "WINHTTP_OPTION_UPGRADE_TO_WEB_SOCKET does not take any arguments.")
 
-    fStatus = WinHttpSetOption(hRequestHandle, WINHTTP_OPTION_UPGRADE_TO_WEB_SOCKET, NULL, 0)
+	fStatus = WinHttpSetOption(hRequestHandle, WINHTTP_OPTION_UPGRADE_TO_WEB_SOCKET, NULL, 0);
+
     if (!fStatus)
     {
         dwError = GetLastError();
@@ -63,7 +70,8 @@ int __cdecl wmain()
     // Application may specify additional headers if needed.
     //
 
-    fStatus = WinHttpSendRequest(hRequestHandle, WINHTTP_NO_ADDITIONAL_HEADERS, 0, NULL, 0, 0, 0);
+	fStatus = WinHttpSendRequest(hRequestHandle, WINHTTP_NO_ADDITIONAL_HEADERS, 0, NULL, 0, 0, 0);
+
     if (!fStatus)
     {
         dwError = GetLastError();
@@ -96,59 +104,94 @@ int __cdecl wmain()
     WinHttpCloseHandle(hRequestHandle);
     hRequestHandle = NULL;
 
-    int count = 0;
+	int count = 0;
 
-    do
+	do
     {
         if (dwBufferLength == 0)
         {
             dwError = ERROR_NOT_ENOUGH_MEMORY;
-	    break;
+			break;
         }
 
-	dwError = WinHttpWebSocketReceive(hWebSocketHandle, rgbBuffer, dwBufferLength, &dwBytesTransferred, &eBufferType);
+		dwError = WinHttpWebSocketReceive(hWebSocketHandle, rgbBuffer, dwBufferLength, &dwBytesTransferred, &eBufferType);
 
         if (dwError != ERROR_SUCCESS)
         {
             break;
         }
 		
-	wprintf(L"%.*S", dwBytesTransferred, rgbBuffer);
+		wprintf(L"%.*S", dwBytesTransferred, rgbBuffer);
+		
+        if (dwBytesTransferred < sizeof rgbBuffer) {
+            wprintf(L"\n");
 
-	if (dwBytesTransferred < sizeof rgbBuffer)
-		wprintf(L"\n"); 
+            if (count == 1) {
 
-	if (count == 1) {
-		char browse[] = "browse";
-		dwError = WinHttpWebSocketSend(hWebSocketHandle, WINHTTP_WEB_SOCKET_BINARY_MESSAGE_BUFFER_TYPE, (PVOID)browse, (DWORD)strlen(browse));
+                printf("\nBrowse result:\n\n");
 
-		if (dwError != ERROR_SUCCESS)
-		{
-			break;
-		}
-	}
-	else if (count == 2) {
-		char subscribe[] = "subscribe: Random.Int1";
-		dwError = WinHttpWebSocketSend(hWebSocketHandle, WINHTTP_WEB_SOCKET_BINARY_MESSAGE_BUFFER_TYPE, (PVOID)subscribe, (DWORD)strlen(subscribe));
+                char browse[] = "browse";
+                dwError = WinHttpWebSocketSend(hWebSocketHandle, WINHTTP_WEB_SOCKET_BINARY_MESSAGE_BUFFER_TYPE, (PVOID)browse, (DWORD)strlen(browse));
 
-		if (dwError != ERROR_SUCCESS)
-		{
-			break;
-		}
-	}
-	else if (count > 8)
-		break;
+                if (dwError != ERROR_SUCCESS)
+                {
+                    break;
+                }
+            }
+            else if (count == 2) {
 
-	if (dwBytesTransferred < sizeof rgbBuffer)
-		++count;
-	    
-    } while (true);
+                printf("\nHDA result:\n\n");
+
+                time_t start = time(NULL) - 120;
+                time_t end = time(NULL);
+                char command[MAXBYTE] = { NULL };
+                sprintf_s(command, "readRaw: Random.Int1 -%lld -%lld", start, end);
+                dwError = WinHttpWebSocketSend(hWebSocketHandle, WINHTTP_WEB_SOCKET_BINARY_MESSAGE_BUFFER_TYPE, (PVOID)command, (DWORD)strlen(command));
+
+                if (dwError != ERROR_SUCCESS)
+                {
+                    break;
+                }
+            }
+            else if (count == 3) {
+
+                printf("\nAE result:\n\n");
+
+                char command[] = "subscribeAE";
+                dwError = WinHttpWebSocketSend(hWebSocketHandle, WINHTTP_WEB_SOCKET_BINARY_MESSAGE_BUFFER_TYPE, (PVOID)command, (DWORD)strlen(command));
+
+                if (dwError != ERROR_SUCCESS)
+                {
+                    break;
+                }
+            }
+            else if (count == 4) {
+
+                printf("\nDA result:\n\n");
+
+                char command[] = "subscribe: Random.Int1";
+                dwError = WinHttpWebSocketSend(hWebSocketHandle, WINHTTP_WEB_SOCKET_BINARY_MESSAGE_BUFFER_TYPE, (PVOID)command, (DWORD)strlen(command));
+
+                if (dwError != ERROR_SUCCESS)
+                {
+                    break;
+                }
+            }
+            else
+                if (count > 8)
+                    break;
+
+            if (dwBytesTransferred < sizeof rgbBuffer)
+                ++count;
+        }
+	} while (true);
 
     //
     // Gracefully close the connection.
     //
 
-    dwError = WinHttpWebSocketClose(hWebSocketHandle, WINHTTP_WEB_SOCKET_SUCCESS_CLOSE_STATUS, NULL, 0)
+	dwError = WinHttpWebSocketClose(hWebSocketHandle, WINHTTP_WEB_SOCKET_SUCCESS_CLOSE_STATUS, NULL, 0);
+
     if (dwError != ERROR_SUCCESS)
     {
         goto quit;
@@ -158,13 +201,13 @@ int __cdecl wmain()
     // Check close status returned by the server.
     //
 
-    dwError = WinHttpWebSocketQueryCloseStatus(hWebSocketHandle, &usStatus, rgbCloseReasonBuffer, ARRAYSIZE(rgbCloseReasonBuffer), &dwCloseReasonLength);
+	dwError = WinHttpWebSocketQueryCloseStatus(hWebSocketHandle, &usStatus, rgbCloseReasonBuffer, ARRAYSIZE(rgbCloseReasonBuffer), &dwCloseReasonLength);
     if (dwError != ERROR_SUCCESS)
     {
         goto quit;
     }
 
-    wprintf(L"The server closed the connection with status code: '%d' and reason: '%.*S'\n", (int)usStatus, dwCloseReasonLength, rgbCloseReasonBuffer);
+	wprintf(L"The server closed the connection with status code: '%d' and reason: '%.*S'\n", (int)usStatus, dwCloseReasonLength, rgbCloseReasonBuffer);
 
 quit:
 

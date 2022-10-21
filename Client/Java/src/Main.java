@@ -1,7 +1,6 @@
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.WebSocket;
-import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 
 public class Main {
@@ -10,18 +9,39 @@ public class Main {
 
 		WebSocket ws = HttpClient.newHttpClient().newWebSocketBuilder()
 				.buildAsync(URI.create("ws://localhost/OPC/main.opc"), new WebSocketClient()).join();
-
+		
+		System.out.println("\nBrowse Result\n");
 		ws.sendText("browse", true);
+		
 		Thread.sleep(1000);
-		ws.sendText("subscribe:Random.Int1", true);
-
+		System.out.println("\nHDA Result\n");
+		long start = System.currentTimeMillis() / 1000 - 120;
+		long end = System.currentTimeMillis() / 1000;
+		ws.sendText("readRaw:Random.Int1 -" + start + " -" + end, true);
+				
+		Thread.sleep(1000);
+		System.out.println("\nAE Result\n");
+		ws.sendText("subscribeAE", true);
+				
 		int count = 0;
 
-		while (count < 8) {
+		while (count < 15) {
 			Thread.sleep(1000);
 			++count;
 		}
-
+		
+		ws.sendText("unsubscribeAE", true);
+		
+		Thread.sleep(1000);
+		System.out.println("\nDA Result\n");
+		ws.sendText("subscribe:Random.Int1", true);
+		
+		count = 0;
+		while (count < 4) {
+			Thread.sleep(1000);
+			++count;
+		}
+		
 		ws.sendClose(WebSocket.NORMAL_CLOSURE, "");
 	}
 
