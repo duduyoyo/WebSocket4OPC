@@ -82,7 +82,7 @@ Run command "uninstall.bat" in command line with administrator privilege from th
 Sample codes for different languages (Python/Swift/C#/C++/Java) are available in client folder<br>
 
 <h4>Python</h4>
-<img src="https://user-images.githubusercontent.com/13662339/193420183-a1edf74b-d4f4-403e-ab09-0677b796634b.png" width=70%>
+<img src="https://user-images.githubusercontent.com/13662339/197107387-bf8b6041-116a-4d12-9da3-099bb2d0e6f3.png" width=70%>
 
 <h4>Swift</h4>
 <div style="display: table">
@@ -95,13 +95,13 @@ Sample codes for different languages (Python/Swift/C#/C++/Java) are available in
 
 </div>
 <h4>C#</h4>
-<img src="https://user-images.githubusercontent.com/13662339/193420280-b0e27b8b-f308-49c5-a377-3ca03fea8d42.png" width=70%>
+<img src="https://user-images.githubusercontent.com/13662339/197107059-540da40e-7171-4f4e-919f-ce566aa0139b.png" width=70%>
 
 <h4>C++</h4>
-<img src="https://user-images.githubusercontent.com/13662339/193420342-7b2b0f85-6d1f-4772-9c30-00395200a4a0.png" width=70%>
+<img src="https://user-images.githubusercontent.com/13662339/197102253-c7e28d90-768e-442e-9ad2-b51e92abe3f0.png" width=70%>
 
 <h4>Java</h4>
-<img src="https://user-images.githubusercontent.com/13662339/193421170-798595d9-f926-4813-aead-8dd2b0625ab9.png" width=70%>
+<img src="https://user-images.githubusercontent.com/13662339/197100120-d3bcb97f-b067-47f8-8c8d-ae3e25baea9a.png" width=70%>
 
 <h2>Roadmap</h2>
 - Read/write feature in DA upon request<br>
