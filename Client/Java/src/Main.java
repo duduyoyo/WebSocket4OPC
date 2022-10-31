@@ -9,20 +9,21 @@ public class Main {
 
 		WebSocket ws = HttpClient.newHttpClient().newWebSocketBuilder()
 				.buildAsync(URI.create("ws://localhost/OPC/main.opc"), new WebSocketClient()).join();
-		
+	
 		System.out.println("\nBrowse Result\n");
-		ws.sendText("browse", true);
+		ws.sendText("browse: Random", true);
 		
 		Thread.sleep(1000);
 		System.out.println("\nHDA Result\n");
-		long start = System.currentTimeMillis() / 1000 - 120;
+		long start = System.currentTimeMillis() / 1000 - 60;
 		long end = System.currentTimeMillis() / 1000;
-		ws.sendText("readRaw:Random.Int1 -" + start + " -" + end, true);
+		ws.sendText("readRaw:Random.Int1, Random.Int2 -" + start + " -" + end, true);
 				
 		Thread.sleep(1000);
 		System.out.println("\nAE Result\n");
 		ws.sendText("subscribeAE", true);
-				
+		
+		
 		int count = 0;
 
 		while (count < 15) {
@@ -34,7 +35,7 @@ public class Main {
 		
 		Thread.sleep(1000);
 		System.out.println("\nDA Result\n");
-		ws.sendText("subscribe:Random.Int1", true);
+		ws.sendText("subscribe:Random.Int1, Random.Int2", true);
 		
 		count = 0;
 		while (count < 4) {

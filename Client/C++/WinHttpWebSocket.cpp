@@ -108,12 +108,6 @@ int __cdecl wmain()
 
 	do
     {
-        if (dwBufferLength == 0)
-        {
-            dwError = ERROR_NOT_ENOUGH_MEMORY;
-			break;
-        }
-
 		dwError = WinHttpWebSocketReceive(hWebSocketHandle, rgbBuffer, dwBufferLength, &dwBytesTransferred, &eBufferType);
 
         if (dwError != ERROR_SUCCESS)
@@ -130,7 +124,7 @@ int __cdecl wmain()
 
                 printf("\nBrowse result:\n\n");
 
-                char browse[] = "browse";
+                char browse[] = "browse: Random";
                 dwError = WinHttpWebSocketSend(hWebSocketHandle, WINHTTP_WEB_SOCKET_BINARY_MESSAGE_BUFFER_TYPE, (PVOID)browse, (DWORD)strlen(browse));
 
                 if (dwError != ERROR_SUCCESS)
@@ -142,10 +136,10 @@ int __cdecl wmain()
 
                 printf("\nHDA result:\n\n");
 
-                time_t start = time(NULL) - 120;
+                time_t start = time(NULL) - 90;
                 time_t end = time(NULL);
                 char command[MAXBYTE] = { NULL };
-                sprintf_s(command, "readRaw: Random.Int1 -%lld -%lld", start, end);
+                sprintf_s(command, "readRaw: Random.Int1, Random.Int2 -%lld -%lld", start, end);
                 dwError = WinHttpWebSocketSend(hWebSocketHandle, WINHTTP_WEB_SOCKET_BINARY_MESSAGE_BUFFER_TYPE, (PVOID)command, (DWORD)strlen(command));
 
                 if (dwError != ERROR_SUCCESS)
@@ -169,7 +163,7 @@ int __cdecl wmain()
 
                 printf("\nDA result:\n\n");
 
-                char command[] = "subscribe: Random.Int1";
+                char command[] = "subscribe: Random.Int1, Random.Int2";
                 dwError = WinHttpWebSocketSend(hWebSocketHandle, WINHTTP_WEB_SOCKET_BINARY_MESSAGE_BUFFER_TYPE, (PVOID)command, (DWORD)strlen(command));
 
                 if (dwError != ERROR_SUCCESS)

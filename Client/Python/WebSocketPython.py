@@ -11,19 +11,19 @@ async def main():
 
             if i == 1:
                 print("\nBrowse result:\n")
-                await ws.send("browse")
+                await ws.send("browse: Random")
             elif i == 2:
                 print("\nHDA result:\n")
-                start = time.time() - 120
+                start = time.time()-25
                 end = time.time()
-                command = "readRaw: Random.Int1 -" + str(start) + " -" + str(end)
+                command = "readRaw: Random.Int1, Random.Int2 -" + str(start) + " -" + str(end)
                 await ws.send(command)
             elif i == 3:
                 print("\nAE result:\n")
                 await ws.send("subscribeAE")
             elif i == 4:
                 print("\nDA result:\n")
-                await ws.send("subscribe: Random.Int1")
+                await ws.send("subscribe: Random.Int1, Random.Int2")
             if i == 8:
                 break
             

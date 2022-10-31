@@ -33,14 +33,14 @@ namespace WebSocketSharp
                     if (count == 1)
                     {
                         Console.WriteLine("\nBrowse result:\n");
-                        await ws.SendAsync(new ArraySegment<byte>(Encoding.UTF8.GetBytes("browse")), WebSocketMessageType.Text, true, CancellationToken.None);
+                        await ws.SendAsync(new ArraySegment<byte>(Encoding.UTF8.GetBytes("browse: Random")), WebSocketMessageType.Text, true, CancellationToken.None);
                     }
                     else if (count == 2)
                     {
                         Console.WriteLine("\nHDA result:\n");
-                        long start = DateTimeOffset.Now.ToUnixTimeSeconds() - 120;
+                        long start = DateTimeOffset.Now.ToUnixTimeSeconds() - 20;
                         long end = DateTimeOffset.Now.ToUnixTimeSeconds();
-                        String command = "readRaw: Random.Int1 -" + start + " -" + end;
+                        String command = "readRaw: Random.Int1, Random.Int2 -" + start + " -" + end;
                         await ws.SendAsync(new ArraySegment<byte>(Encoding.UTF8.GetBytes(command)), WebSocketMessageType.Text, true, CancellationToken.None);
                     }
                     else if (count == 3)
@@ -51,7 +51,7 @@ namespace WebSocketSharp
                     else if (count == 4)
                     {
                         Console.WriteLine("\nDA result:\n");
-                        await ws.SendAsync(new ArraySegment<byte>(Encoding.UTF8.GetBytes("subscribe:Random.Int1")), WebSocketMessageType.Text, true, CancellationToken.None);
+                        await ws.SendAsync(new ArraySegment<byte>(Encoding.UTF8.GetBytes("subscribe:Random.Int1, Random.Int2")), WebSocketMessageType.Text, true, CancellationToken.None);
                     }
                     else if (count > 6)
                         await ws.CloseOutputAsync(WebSocketCloseStatus.NormalClosure, "I am closing", CancellationToken.None);
