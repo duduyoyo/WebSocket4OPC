@@ -10,7 +10,7 @@
 		8C0740F224BF1EA200E5184A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0740F124BF1EA200E5184A /* AppDelegate.swift */; };
 		8C0740F424BF1EA200E5184A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0740F324BF1EA200E5184A /* SceneDelegate.swift */; };
 		8C0740F624BF1EA200E5184A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0740F524BF1EA200E5184A /* ContentView.swift */; };
-		8C98CAD424E2D849008CA6E2 /* WebSocketController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C98CAD324E2D849008CA6E2 /* WebSocketController.swift */; };
+		8C98CAD424E2D849008CA6E2 /* OPCModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C98CAD324E2D849008CA6E2 /* OPCModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -198,7 +198,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -253,7 +253,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -267,10 +267,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"Model and View/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = N4284T3DJP;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = "Model and View/Info.plist";
+				INFOPLIST_FILE = View/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -286,10 +287,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"Model and View/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = N4284T3DJP;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = "Model and View/Info.plist";
+				INFOPLIST_FILE = View/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

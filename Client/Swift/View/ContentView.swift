@@ -12,22 +12,15 @@ struct HorizonLabelStyle: LabelStyle {
 }
 
 struct ContentView: View {
-    
-    @ObservedObject var opcModel:OPCModel
+    @ObservedObject var opcModel = OPCModel()
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
-    
-    init(){
-        
-        let DAalerts = [DAItem]()
-        let AEalerts = [AEItem]()
-        let browseResult = [BrowseItem]()
-        let servers = OpcServers(da:nil,ae:nil)
-        let connected = false
-        let DAenabled = false
-        let AEenabled = false
-        
-        opcModel=OPCModel(DAResult:DAalerts, AEResult: AEalerts, browseResult: browseResult, servers: servers, isConnected: connected, isDAsupported: DAenabled, isAEsupported: AEenabled)
-    }
+    @State private var startDate = Date()
+    @State private var endDate = Date()
+    @State private var maxAlarm = 10
+    @State private var server: String = "Server name or IP"
+
+    private var alarmNums = [10, 20, 40, 60 ,80, 100, 120, 150, 200]
+    private var linesPerTag = [1, 2, 4, 6 ,8, 10, 15, 20]
     
     func TimeString(time: Int) -> String {
 
@@ -40,32 +33,24 @@ struct ContentView: View {
     
     var body: some View {
         TabView() {
-            Table(opcModel.DAResult){
-                TableColumn("id"){ item in
-                    if horizontalSizeClass == .compact {
-                        VStack {
-                            HStack {
-                                Text(item.i)
-                                Spacer()
-                                Text(item.v)
-                                Spacer()
-                                Text(item.q==192 ? "Good":"Bad")
-                                Spacer()
-                                Text(TimeString(time:item.t))
-                            }
+            Form {
+                Section {
+                    Picker("Maximum rows per tag", selection: $opcModel.linesPerTag){
+                        ForEach(linesPerTag, id:\.self) {
+                            Text(String($0))
                         }
-                    } else {
-                        Text(item.i)
                     }
                 }
-                TableColumn("value"){ item in
-                    Text(item.v)
-                }
-                TableColumn("quality"){ item in
-                    Text(item.q==192 ? "Good":"Bad")
-                }
-                TableColumn("time"){ item in
-                    Text(TimeString(time:item.t))
+                List(opcModel.DAResult.sorted(by: <)) { item in
+                    HStack {
+                        Text(item.i)
+                        Spacer()
+                        Text(item.v)
+                        Spacer()
+                        Text(item.q==192 ? "Good":"Bad")
+                        Spacer()
+                        Text(TimeString(time:item.t))
+                    }
                 }
             }
             .padding()
@@ -74,34 +59,41 @@ struct ContentView: View {
             }
             .tag(1)
             
-            List(opcModel.AEResult) { item in
-                VStack(alignment: .leading) {
-                    HStack {
-                        Text(item.s+":")
-                        Text(item.m)
-                    }
-                    HStack {
-                        Text(item.c)
-                        Text(item.sc)
-                    }
-                    HStack {
-                        Text(TimeString(time:item.t))
-                        Spacer()
-                        Toggle("Accept", isOn:Binding(
-                            get: {item.isRecongnized},
-                            set: { newValue in
-                                item.isRecongnized=newValue
-                                
-                                // TODO: Recongnize alarm here
-                            }
-                        )
-                        )
-                        .toggleStyle(.button)
-                        .disabled(item.isRecongnized)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 15)
-                                .stroke(Color.blue, lineWidth: 1)
-                        )
+            Form {
+                Section {
+                    Picker("Maximum alarms to display", selection: $maxAlarm){
+                        ForEach(alarmNums, id:\.self) {
+                            Text(String($0))
+                        }
+                    }.onChange(of: maxAlarm) { maxAlarm in opcModel.maxAlarm = maxAlarm}
+                }
+                List(opcModel.AEResult.suffix(maxAlarm)) { item in
+                    VStack(alignment: .leading) {
+                        HStack {
+                            Text(item.s+":")
+                            Text(item.m)
+                        }
+                        HStack {
+                            Text(item.c)
+                            Text(item.sc)
+                        }
+                        HStack {
+                            Text(TimeString(time:item.t))
+                            Spacer()
+                            Toggle("Accept", isOn:Binding(
+                                get: {item.isRecongnized},
+                                set: { newValue in
+                                    item.isRecongnized=newValue
+                                }
+                            )
+                            )
+                            .toggleStyle(.button)
+                            .disabled(item.isRecongnized)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 15)
+                                    .stroke(Color.blue, lineWidth: 1)
+                            )
+                        }
                     }
                 }
             }
@@ -110,6 +102,47 @@ struct ContentView: View {
                 Label("AE", systemImage: "bell")
             }
             .tag(2)
+            
+            Form {
+                Section {
+                    Picker("", selection: $opcModel.selectedTag){
+                        
+                        Text("Choose a tag").tag(nil as String?)
+                        ForEach(opcModel.tagSet.sorted(by: <), id:\.self) {
+                            Text($0).tag($0 as String?)
+                        }
+                    }
+                    
+                    DatePicker("Start", selection: $startDate, displayedComponents: [.date, .hourAndMinute])
+                    DatePicker("End", selection: $endDate, displayedComponents: [.date, .hourAndMinute])
+                    HStack{
+                        Spacer()
+                        Button("Read") {
+                            
+                            opcModel.socket.send(.string("readRaw: " + opcModel.selectedTag! + " -" + String(startDate.timeIntervalSince1970) + " -" + String(endDate.timeIntervalSince1970)), completionHandler: { error in
+                                if let error = error {
+                                    print("readRaw failed with Error \(error.localizedDescription)")
+                                }
+                            })
+                        }.disabled(opcModel.selectedTag == nil ? true : false)
+                        Spacer()
+                    }
+                }
+                List(opcModel.HDAResult){ item in
+                    HStack {
+                        Text(item.v)
+                        Spacer()
+                        Text(item.q==192 ? "Good":"Bad")
+                        Spacer()
+                        Text(TimeString(time:item.t))
+                    }
+                }
+            }
+            .padding()
+            .tabItem {
+                Label("HDA", systemImage: "calendar.badge.clock")
+            }
+            .tag(3)
             
             Form {
                 Section {
@@ -133,18 +166,36 @@ struct ContentView: View {
                         .disabled(true)
                         .tint(.green)
                         
-                        Toggle("", isOn: Binding(
-                            get: {opcModel.isConnected},
+                        Toggle("HDA", isOn: Binding(
+                            get: {opcModel.isHDAsupported},
                             set: { newValue in
-                                opcModel.isConnected=newValue}
+                                opcModel.isHDAsupported=newValue}
                         ))
-                        .onChange(of: opcModel.isConnected) { value in
-                            if value {
-                                self.opcModel.connect()
-                            } else {
+                        .toggleStyle(.button)
+                        .disabled(true)
+                        .tint(.green)
+                    }
+                    
+                    HStack(alignment: .center) {
+
+                        TextField(text: $server){}
+                            .textFieldStyle(.roundedBorder)
+                            .multilineTextAlignment(.center)
+                            .textContentType(.URL)
+                        
+                        Button {
+                            if opcModel.isConnected {
                                 self.opcModel.disconnect()
+                            } else {
+                                self.opcModel.connect(server:server)
                             }
-                        }
+                        } label: {
+                            if opcModel.isConnected {
+                                Text("Disconnect")
+                            } else {
+                                Text("Connect")
+                            }
+                        }.buttonStyle(.bordered)
                     }
                 }
                 
@@ -152,11 +203,21 @@ struct ContentView: View {
                     List(opcModel.browseResult, children:\.children) { myAlertWrapper in
                         if myAlertWrapper.b == 1 {
                             Label(myAlertWrapper.i, systemImage: "plus").labelStyle(HorizonLabelStyle())
-                                .onTapGesture(perform: {
-                                    opcModel.socket.send(.string("browse: "+myAlertWrapper.i), completionHandler: { error in if let error = error {
-                                        print("browse failed with Error \(error.localizedDescription)")
-                                    }})
-                                })
+                            .onTapGesture(perform: {
+                                if opcModel.isDAsupported {
+                                    opcModel.socket.send(.string("browse: "+myAlertWrapper.i), completionHandler: { error in
+                                        if let error = error {
+                                            print("browse DA failed with Error \(error.localizedDescription)")
+                                        }
+                                    })
+                                } else if opcModel.isHDAsupported {
+                                    opcModel.socket.send(.string("browseHDA: "+myAlertWrapper.i), completionHandler: { error in
+                                        if let error = error {
+                                            print("browse HDA failed with Error \(error.localizedDescription)")
+                                        }
+                                    })
+                                }
+                            })
                         } else {
                             HStack{
                                 Text(myAlertWrapper.i)
@@ -166,12 +227,17 @@ struct ContentView: View {
                                     .onTapGesture {
                                         myAlertWrapper.isChecked.toggle()
                                         if myAlertWrapper.isChecked {
+                                            opcModel.tagSet.insert(myAlertWrapper.i)
                                             opcModel.socket.send(.string("subscribe: "+myAlertWrapper.i), completionHandler: { error in
                                                 if let error = error {
                                                     print("subscribe failed with Error \(error.localizedDescription)")
                                                 }
                                             })
                                         } else {
+                                            opcModel.tagSet.remove(myAlertWrapper.i)
+                                            if (opcModel.selectedTag==myAlertWrapper.i){
+                                                opcModel.selectedTag=nil
+                                            }
                                             opcModel.socket.send(.string("unsubscribe: "+myAlertWrapper.i), completionHandler: { error in
                                                 if let error = error {
                                                     print("unsubscribe failed with Error \(error.localizedDescription)")
@@ -188,7 +254,7 @@ struct ContentView: View {
             .tabItem {
                 Label("Setting", systemImage: "gearshape")
             }
-            .tag(3)
+            .tag(4)
         }
     }
 }
