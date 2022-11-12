@@ -95,7 +95,7 @@ class OPCModel : ObservableObject {
     @Published var isHDAsupported=false
     @Published var linesPerTag = 1
     
-    var maxAlarm = 10
+    var maxAlarm = 0
     private var session: URLSession
     var socket: URLSessionWebSocketTask!
     

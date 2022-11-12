@@ -12,7 +12,7 @@ struct HorizonLabelStyle: LabelStyle {
 }
 
 struct ContentView: View {
-    @ObservedObject var opcModel = OPCModel()
+    @ObservedObject private var opcModel = OPCModel()
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     @State private var startDate = Date()
     @State private var endDate = Date()
@@ -21,6 +21,10 @@ struct ContentView: View {
 
     private var alarmNums = [10, 20, 40, 60 ,80, 100, 120, 150, 200]
     private var linesPerTag = [1, 2, 4, 6 ,8, 10, 15, 20]
+    
+    init(){
+        opcModel.maxAlarm = maxAlarm
+    }
     
     func TimeString(time: Int) -> String {
 

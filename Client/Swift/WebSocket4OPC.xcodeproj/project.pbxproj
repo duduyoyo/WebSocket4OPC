@@ -19,7 +19,7 @@
 		8C0740F324BF1EA200E5184A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		8C0740F524BF1EA200E5184A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		8C0740FF24BF1EA700E5184A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8C98CAD324E2D849008CA6E2 /* WebSocketController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocketController.swift; sourceTree = "<group>"; };
+		8C98CAD324E2D849008CA6E2 /* OPCModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OPCModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,8 +36,8 @@
 		8C0740E524BF1EA200E5184A = {
 			isa = PBXGroup;
 			children = (
-				91A303242895BB9F0041E3D2 /* Controller */,
-				8C0740F024BF1EA200E5184A /* Model and View */,
+				91A303242895BB9F0041E3D2 /* Model */,
+				8C0740F024BF1EA200E5184A /* View */,
 				8C0740EF24BF1EA200E5184A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -50,7 +50,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		8C0740F024BF1EA200E5184A /* Model and View */ = {
+		8C0740F024BF1EA200E5184A /* View */ = {
 			isa = PBXGroup;
 			children = (
 				8C0740F124BF1EA200E5184A /* AppDelegate.swift */,
@@ -58,15 +58,15 @@
 				8C0740F524BF1EA200E5184A /* ContentView.swift */,
 				8C0740FF24BF1EA700E5184A /* Info.plist */,
 			);
-			path = "Model and View";
+			path = View;
 			sourceTree = "<group>";
 		};
-		91A303242895BB9F0041E3D2 /* Controller */ = {
+		91A303242895BB9F0041E3D2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				8C98CAD324E2D849008CA6E2 /* WebSocketController.swift */,
+				8C98CAD324E2D849008CA6E2 /* OPCModel.swift */,
 			);
-			path = Controller;
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -85,7 +85,7 @@
 			dependencies = (
 			);
 			name = WebSocket4OPC;
-			productName = "Conference Q&A";
+			productName = WebSocket4OPC;
 			productReference = 8C0740EE24BF1EA200E5184A /* WebSocket4OPC.app */;
 			productType = "com.apple.product-type.application";
 		};
@@ -137,7 +137,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8C98CAD424E2D849008CA6E2 /* WebSocketController.swift in Sources */,
+				8C98CAD424E2D849008CA6E2 /* OPCModel.swift in Sources */,
 				8C0740F224BF1EA200E5184A /* AppDelegate.swift in Sources */,
 				8C0740F424BF1EA200E5184A /* SceneDelegate.swift in Sources */,
 				8C0740F624BF1EA200E5184A /* ContentView.swift in Sources */,
@@ -268,7 +268,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "";
-				DEVELOPMENT_TEAM = N4284T3DJP;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = View/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
