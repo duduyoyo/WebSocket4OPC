@@ -38,8 +38,8 @@ namespace WebSocketSharp
                     else if (count == 2)
                     {
                         Console.WriteLine("\nHDA result:\n");
-                        long start = DateTimeOffset.Now.ToUnixTimeSeconds() - 20;
-                        long end = DateTimeOffset.Now.ToUnixTimeSeconds();
+                        long start = DateTimeOffset.Now.ToUnixTimeMilliseconds() - 20;
+                        long end = DateTimeOffset.Now.ToUnixTimeMilliseconds();
                         String command = "readRaw: Random.Int1, Random.Int2 -" + start + " -" + end;
                         await ws.SendAsync(new ArraySegment<byte>(Encoding.UTF8.GetBytes(command)), WebSocketMessageType.Text, true, CancellationToken.None);
                     }

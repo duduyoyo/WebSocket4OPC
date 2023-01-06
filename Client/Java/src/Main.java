@@ -15,8 +15,9 @@ public class Main {
 		
 		Thread.sleep(1000);
 		System.out.println("\nHDA Result\n");
-		long start = System.currentTimeMillis() / 1000 - 60;
-		long end = System.currentTimeMillis() / 1000;
+		long start = System.currentTimeMillis() - 1000;
+		long end = System.currentTimeMillis();
+
 		ws.sendText("readRaw:Random.Int1, Random.Int2 -" + start + " -" + end, true);
 				
 		Thread.sleep(1000);

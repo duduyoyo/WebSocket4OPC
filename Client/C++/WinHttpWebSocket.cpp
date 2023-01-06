@@ -135,11 +135,14 @@ int __cdecl wmain()
             else if (count == 2) {
 
                 printf("\nHDA result:\n\n");
+		SYSTEMTIME st;
+                GetSystemTime(&st); 
 
-                time_t start = time(NULL) - 90;
+                time_t start = time(NULL) - 2;
                 time_t end = time(NULL);
                 char command[MAXBYTE] = { NULL };
-                sprintf_s(command, "readRaw: Random.Int1, Random.Int2 -%lld -%lld", start, end);
+		sprintf_s(command, "readRaw: Random.Int1, Random.Int2 -%lld -%lld", start * 1000 + st.wMilliseconds, end * 1000 + st.wMilliseconds);
+
                 dwError = WinHttpWebSocketSend(hWebSocketHandle, WINHTTP_WEB_SOCKET_BINARY_MESSAGE_BUFFER_TYPE, (PVOID)command, (DWORD)strlen(command));
 
                 if (dwError != ERROR_SUCCESS)

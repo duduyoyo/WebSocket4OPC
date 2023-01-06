@@ -14,8 +14,8 @@ async def main():
                 await ws.send("browse: Random")
             elif i == 2:
                 print("\nHDA result:\n")
-                start = time.time()-25
-                end = time.time()
+                start = round(time.time() * 1000) - 2000
+                end = round(time.time() * 1000)
                 command = "readRaw: Random.Int1, Random.Int2 -" + str(start) + " -" + str(end)
                 await ws.send(command)
             elif i == 3:
