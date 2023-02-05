@@ -2,7 +2,7 @@
 Enable WebSocket in OPC DA/AE/HDA Server with JSON return, FIRST TIME ever!
 
 DCOM was developed more than 2 decades ago, which was the pillar of classic OPC. Young kids out of school today love dynamical languages (JavaScript/Python etc) since they are so easy to use. They are reluctunt to get their feet wet on the legacy DCOM technology. Luckily with the quick adoption of WebSocket in most modern popular languages, WebSocket makes it possible to glue dynamical languages and legacy DCOM together.<p>
-This revolutionary solution, WebSocket4OPC, brings unparalleled experience to your desktop and mobile device. It utilizes WebSocket as network transportation layer to communicate in full duplex. Comparing with DCOM's RPC protocol WebSocket is much easy to use and more efficient. With all built-in features provided by Microsoft IIS this solution can access OPC data safely and securely in Internet. Remember - no DCOM to bother or worry, period! 
+This revolutionary solution, WebSocket4OPC, brings unparalleled experience to your desktop and mobile device. It utilizes WebSocket as network transportation layer to communicate in full duplex. Comparing with DCOM's RPC protocol WebSocket is much easy to use and more efficient. With all built-in features provided by Microsoft IIS this solution can make OPC data accessible safely and securely through Internet. Remember - no DCOM to bother or worry, period! 
 
 <h2>Benefits</h2>
 
@@ -51,7 +51,15 @@ Run command "uninstall.bat" in command line with administrator privilege from th
     When "browseHDA: Random" command is sent response will be like,<p>
     <img src="https://user-images.githubusercontent.com/13662339/198896314-9b2dd8cb-6d62-4c78-9aaa-e4dbe4df2a46.png" width=70%>
 
-2. Subscribe tags to DA server<p>
+2. Read from/subscribe to DA server<p>
+  2.1<p>
+   "read: tagID1, tagID2, ..."- Read tags' latest values from DA server<p>
+
+   JSON returns {"DA":[{"i": "tagID1", "v": "20.308", "t": 1643759756112, "q": 192}, {"i": "tagID2", "v": "4", "t": 1643769859342, "q": 192}, ...]}<br>(i - ID, v - value, t - time stamp in milliseconds of epoch UTC, q - quality)<p>
+   When "read: Random.Real4, Random.Int2" command is sent response will be like,<p>
+   <img src="https://user-images.githubusercontent.com/13662339/216796465-f2822c20-9ca2-42f6-8e14-c5ce848e43bf.png" width=70%>
+   
+   2.2<p>
    "subscribe: tagID1, tagID2, ..." - Add monitored tags to DA server and receive updates when new values are available<p>
 
    JSON returns {"DA":[{"i": "tagID1", "v": "20.308", "t": 1643759756112, "q": 192}, {"i": "tagID2", "v": "4", "t": 1643769859342, "q": 192}, ...]}<br>(i - ID, v - value, t - time stamp in milliseconds of epoch UTC, q - quality)<p>
