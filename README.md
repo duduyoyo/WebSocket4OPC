@@ -1,24 +1,24 @@
 # WebSocket4OPC
 Enable WebSocket in OPC DA/AE/HDA Server with JSON return, FIRST TIME ever!
 
-DCOM was developed more than 2 decades ago, which was the pillar of classic OPC. Young kids out of school today love dynamical languages (JavaScript/Python etc) since they are so easy to use. They are reluctunt to get their feet wet on the legacy DCOM technology. Luckily with the quick adoption of WebSocket in most modern popular languages, WebSocket makes it possible to glue dynamical languages and legacy DCOM together.<p>
-This revolutionary solution, WebSocket4OPC, brings unparalleled experience to your desktop and mobile device. It utilizes WebSocket as network transportation layer to communicate in full duplex. Comparing with DCOM's RPC protocol WebSocket is much easy to use and more efficient. With all built-in features provided by Microsoft IIS this solution can make OPC data accessible safely and securely through Internet. Remember - no DCOM to bother or worry, period! 
+DCOM was developed more than 2 decades ago, which was the pillar of classic OPC. Young kids out of school today love dynamical languages (JavaScript/Python etc) due to their easiness. They are reluctunt to get their feet wet on the legacy DCOM technology. Luckily with the quick adoption of WebSocket in most modern popular languages, WebSocket makes it possible to glue dynamical languages and legacy DCOM together.<p>
+This revolutionary solution, WebSocket4OPC, brings unparalleled experience to your desktop and mobile device. It utilizes WebSocket as network transportation layer to communicate in full duplex. Comparing with DCOM's RPC protocol WebSocket is much easy to use and more efficient. With all built-in features provided by Microsoft IIS this solution can make OPC data accessible safely and securely through Internet. Gurantted no DCOM to bother or worry, period! 
 
 <h2>Benefits</h2>
 
 .No DCOM when connecting to a classic OPC server<br>
+.No future DCOM vulnerability or hardening to worry<br>
 .Support dynamical languages (JavaScript/Python etc)<br>
 .Return in standard JSON format<br>
 .Intuitive and easy-to-remember commands instead of checking long REST API syntax<br>
-.No future DCOM vulnerability to worry<br>
 .Built-in account authentication by IIS<br>
 .Built-in secure connection by IIS<br>
 .Make native mobile APP development feasible<br>
 .No tedious 1250-page OPC UA documents to check<br>
 .No OPC UA certificate configuration<br>
 .No OPC UA firewall configuration<br>
-.Cross-platform gurantted(Linux/Mac/Windows)<br>
-.Deploy as Edge or Gateway device without any custom hardware<br> 
+.Cross-platform in client gurantted(Linux/Mac/Windows)<br>
+.Deploy as Edge or Gateway without any expensive custom hardware<br> 
 
 <h2>Pre-requiste</h2>
 1. Install in the same box where classic OPC DA/AE/HDA server is installed<br>
@@ -39,27 +39,34 @@ Run command "uninstall.bat" in command line with administrator privilege from th
       
 1. Browse<p>
    There are two sets of browse commands for DA and HDA servers respectively.<p>
-   "browse" - Show all children tags under top level of DA server<p>
-   "browseHDA" - Show all children tags under top level of HDA server<p>
-   "browse:tagID" - Show all children tags for a tag of DA server<p>
-   "browseHDA:tagID" - Show all children tags for a tag of HDA server<p>
-   "browse:tagID -countsInPagenation -pageNumber" - Show a limited number of children tags in pagenation for a tag of DA server. For example there are 10,000 children tags available under a specific tag and command "browse: tagID -2000 -3" will display 2000 children tags from 4000th to 5999th to correspond to page 3 in DA server<p>
-    "browseHDA:tagID -countsInPagenation -pageNumber" - Show a limited number of children tags in pagenation for a tag of HDA server. For example there are 10,000 children tags available under a specific tag and command "browseHDA: tagID -2000 -3" will display 2000 children tags from 4000th to 5999th to correspond to page 3 in HDA server<p>
+   "browse" - Show all child tags under top level of DA server<p>
+   "browseHDA" - Show all child tags under top level of HDA server<p>
+   "browse:tagID" - Show all child tags under a parent tag of DA server<p>
+   "browseHDA:tagID" - Show all child tags under a parent tag of HDA server<p>
+   "browse:tagID -countsInPagenation -pageNumber" - Show a limited number of child tags in pagenation under a parent tag of DA server. For example there are 10,000 child tags available under a specific tag and command "browse: tagID -2000 -3" will display 2000 child tags from 4000th to 5999th to correspond to page 3 in DA server<p>
+    "browseHDA:tagID -countsInPagenation -pageNumber" - Show a limited number of child tags in pagenation under a parent tag of HDA server. For example there are 10,000 child tags available under a specific tag and command "browseHDA: tagID -2000 -3" will display 2000 child tags from 4000th to 5999th to correspond to page 3 in HDA server<p>
    JSON returns {"parentNodeID":[{"n": "tagName1", "i": "tagID1", "b": 1}, {"n": "tagName2", "i": "tagID2", "b": 0}, ...]}<br>(parentNodeID - parent node id or "" at top level, n - name, i - ID, b - branch)<p>
     When "browse: Random" command is sent response will be like,<p>
     <img src="https://user-images.githubusercontent.com/13662339/193419607-97d11de8-4116-4b0e-a767-e8c810c4ce01.png" width=70%><p>
     When "browseHDA: Random" command is sent response will be like,<p>
     <img src="https://user-images.githubusercontent.com/13662339/198896314-9b2dd8cb-6d62-4c78-9aaa-e4dbe4df2a46.png" width=70%>
 
-2. Read from/subscribe to DA server<p>
+2. Read/write/subscribe to DA server<p>
   2.1<p>
-   "read: tagID1, tagID2, ..."- Read tags' latest values from DA server<p>
+   "read: tagID1, tagID2, ..."- Read tag latest values from DA server<p>
 
    JSON returns {"DA":[{"i": "tagID1", "v": "20.308", "t": 1643759756112, "q": 192}, {"i": "tagID2", "v": "4", "t": 1643769859342, "q": 192}, ...]}<br>(i - ID, v - value, t - time stamp in milliseconds of epoch UTC, q - quality)<p>
    When "read: Random.Real4, Random.Int2" command is sent response will be like,<p>
-   <img src="https://user-images.githubusercontent.com/13662339/216796465-f2822c20-9ca2-42f6-8e14-c5ce848e43bf.png" width=70%>
-   
+   <img src="https://user-images.githubusercontent.com/13662339/216796465-f2822c20-9ca2-42f6-8e14-c5ce848e43bf.png" width=70%>  
+  
    2.2<p>
+   "write: tagID1 -value1; tagID2 -value2; ..."- Write tag values to DA server. It is strongly NOT recommended being deployed in a production environment if it is Internet accessible. Contact developer to have a version without this command for production use. USE IT AT YOUR OWN RISK!<p>
+
+   No JSON return but writing status (success/failure) will be reported as info. Use read command to verify writing's success<p>
+   When "write: Bucket Brigade.Int2 -34; Random.Int2 -12" command is sent response will be like,<p>
+   <img src="https://user-images.githubusercontent.com/13662339/232327090-7744a9be-3300-4b00-a6f7-e7c2f5b23216.png" width=70%>
+  
+   2.3<p>
    "subscribe: tagID1, tagID2, ..." - Add monitored tags to DA server and receive updates when new values are available<p>
 
    JSON returns {"DA":[{"i": "tagID1", "v": "20.308", "t": 1643759756112, "q": 192}, {"i": "tagID2", "v": "4", "t": 1643769859342, "q": 192}, ...]}<br>(i - ID, v - value, t - time stamp in milliseconds of epoch UTC, q - quality)<p>
@@ -134,6 +141,5 @@ https://user-images.githubusercontent.com/13662339/200226922-060a4473-e3ec-4900-
 <img src="https://user-images.githubusercontent.com/13662339/211081301-6a2e0475-383f-43d4-9fff-a66a9a094c04.png" width=70%>
 
 <h2>Roadmap</h2>
-- Write feature in DA upon request<br>
 - More HDA features available upon request<br>
 - Full-fledged open source native client for iOS<br>
