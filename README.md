@@ -27,7 +27,7 @@ This revolutionary solution, WebSocket4OPC, brings unparalleled experience to yo
 
 <h2>Installation</h2>
 
-Download all files from server folder to your desired one. Launch a command line with administrator privilege and enter to your download folder. Run command "install.bat userAccount userPassword" to complete installation. userAccount/userPassword need be replaced with your own Windows account/password and make sure that account has administrator privilege. If you have previous installation, uninstall it first.
+Download all files from server folder to your desired one. Launch a command line with administrator privilege and enter to your download folder. Run command "install.bat userAccount userPassword" to complete installation. userAccount/userPassword need be replaced with your own Windows account/password and make sure that account has administrator privilege. If you have previous installation, uninstall it first. Note - this account credential is only used by IIS to configure a new app pool and not used or stored anywhere else.
 
 To verify, launch browser (Chrome/Safari/Edge) and enter URL "http://localhost/OPC/websocket.html"<p>
 <img src="https://user-images.githubusercontent.com/13662339/199052370-58d084ef-170e-4d40-87d0-295766d36b43.png" width=70%>
