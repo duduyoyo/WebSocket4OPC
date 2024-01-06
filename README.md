@@ -33,7 +33,7 @@ To verify, launch browser (Chrome/Safari/Edge) and enter URL "http://localhost/O
 <img src="https://user-images.githubusercontent.com/13662339/199052370-58d084ef-170e-4d40-87d0-295766d36b43.png" width=70%>
 
 <h2>Uninstallation</h2>
-Run command "uninstall.bat" in command line with administrator privilege from the your download folder.
+Run command "uninstall.bat" in command line with administrator privilege in your download folder.
 
 <h2>Usage</h2><p>
       
@@ -51,7 +51,7 @@ Run command "uninstall.bat" in command line with administrator privilege from th
     When "browseHDA: Random" command is sent response will be like,<p>
     <img src="https://user-images.githubusercontent.com/13662339/198896314-9b2dd8cb-6d62-4c78-9aaa-e4dbe4df2a46.png" width=70%>
 
-2. Read/write/subscribe to DA server<p>
+2. Read/write/subscribe operations in DA server<p>
   2.1<p>
    "read: tagID1, tagID2, ..."- Read tag latest values from DA server<p>
 
@@ -87,7 +87,7 @@ Run command "uninstall.bat" in command line with administrator privilege from th
 5. Unsubscribe from AE server<p>
    "unsubscribeAE" - Remove notification on alarms and events<p>
          
-6. Read history data from HDA server<p>
+6. Read/insert/replace/delete operations in HDA server<p>
   6.1<p>
    "readRaw: tagID1, tagID2 -startTimeStamp -endTimeStamp" - Read tags' history raw data based on start and end time stamps<p>
   
