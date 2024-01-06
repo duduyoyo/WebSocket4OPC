@@ -1,39 +1,39 @@
 # WebSocket4OPC
 Enable WebSocket in OPC DA/AE/HDA Server with JSON return, FIRST TIME ever!
 
-DCOM was developed more than 2 decades ago, which was the pillar of classic OPC. Young kids out of school today love dynamical languages (JavaScript/Python etc) due to their easiness. They are reluctunt to get their feet wet on the legacy DCOM technology. Luckily with the quick adoption of WebSocket in most modern popular languages, WebSocket makes it possible to glue dynamical languages and legacy DCOM together.<p>
-This revolutionary solution, WebSocket4OPC, brings unparalleled experience to your desktop and mobile device. It utilizes WebSocket as network transportation layer to communicate in full duplex. Comparing with DCOM's RPC protocol WebSocket is much easy to use and more efficient. With all built-in features provided by Microsoft IIS this solution can make OPC data accessible safely and securely through Internet. Gurantted no DCOM to bother or worry, period! 
+DCOM was developed more than 2 decades ago, which was the pillar of classic OPC. Young kids today love dynamical languages (JavaScript/Python etc) due to their simplicity. They are reluctunt to get their feet wet on the legacy DCOM technology. Luckily with the popular adoption of WebSocket in most modern programming languages, it possible to glue dynamical languages and legacy DCOM together.<p>
+This revolutionary solution, WebSocket4OPC, brings unparalleled experience to your desktop and mobile device. It utilizes WebSocket as network transportation layer in its full duplex. Comparing with DCOM's RPC protocol WebSocket is much easy to use and more efficient. With the built-in WebSocket feature in Microsoft IIS OPC data becomes accessible safely and securely through Internet. It is time to say, GoodBye DCOM! 
 
 <h2>Benefits</h2>
 
 .No DCOM when connecting to a classic OPC server<br>
 .No future DCOM vulnerability or hardening to worry<br>
 .Support dynamical languages (JavaScript/Python etc)<br>
-.Return in standard JSON format<br>
-.Intuitive and easy-to-remember commands instead of checking long REST API syntax<br>
+.Standard JSON return<br>
+.Intuitive and easy-to-remember commands instead of long REST API URL<br>
 .Built-in account authentication by IIS<br>
 .Built-in secure connection by IIS<br>
-.Make native mobile APP development feasible<br>
-.No tedious 1250-page OPC UA documents to check<br>
+.Native mobile APP development feasible<br>
+.No tedious 1250-page OPC UA documents to consult<br>
 .No OPC UA certificate configuration<br>
 .No OPC UA firewall configuration<br>
 .Cross-platform in client gurantted(Linux/Mac/Windows)<br>
-.Deploy as Edge or Gateway without any expensive custom hardware<br> 
+.Edge or Gateway deployment ready without any expensive custom hardware<br> 
 
 <h2>Pre-requiste</h2>
-1. Install in the same box where classic OPC DA/AE/HDA server is installed<br>
+1. Install in the same server box where classic OPC DA/AE/HDA server is running<br>
 2. WebSocket feature for IIS need be enabled in the same server box<br>
-3. Microsoft VC++ Runtim for X64 required (download <a href="https://aka.ms/vs/17/release/vc_redist.x64.exe">here</a> and install if you don't have)<br>
+3. Microsoft VC++ Runtim for X64 required (download <a href="https://aka.ms/vs/17/release/vc_redist.x64.exe">here</a> and install it if needed)<br>
 
 <h2>Installation</h2>
 
-Download all files from server folder to your desired one. Launch a command line with administrator privilege and enter to your download folder. Run command "install.bat userAccount userPassword" to complete installation. userAccount/userPassword need be replaced with your own Windows account/password and make sure that account has administrator privilege. If you have previous installation, uninstall it first. Note - this account credential is only used by IIS to configure a new app pool and not used or stored anywhere else.
+Download all files from server folder to your desired one. Launch a command line with administrator privilege and enter to your download folder. Run command "install.bat userAccount userPassword" to complete installation. userAccount/userPassword need be replaced with your own Windows account/password and make sure that account has administrator privilege. This account is only used by IIS to configure a new app pool and not used by this solution or stored anywhere else. If you have previous installation, uninstall it first.
 
 To verify, launch browser (Chrome/Safari/Edge) and enter URL "http://localhost/OPC/websocket.html"<p>
 <img src="https://user-images.githubusercontent.com/13662339/199052370-58d084ef-170e-4d40-87d0-295766d36b43.png" width=70%>
 
 <h2>Uninstallation</h2>
-Run command "uninstall.bat" in command line with administrator privilege from the your download folder to uninstall.
+Run command "uninstall.bat" in command line with administrator privilege from the your download folder.
 
 <h2>Usage</h2><p>
       
@@ -102,6 +102,11 @@ Run command "uninstall.bat" in command line with administrator privilege from th
    
    When "readAtTime: Saw-toothed Waves.Int1,Saw-toothed Waves.Int2 -1672978265112 -1672978266338" command is sent response will be like,<p>
    <img src="https://user-images.githubusercontent.com/13662339/210928806-418d44af-c09f-4819-a27b-50450af92e00.png" width=70%>
+
+   6.3<p>
+   "readModified: tagID1, tagID2, ..., tagIDx -timeStamp1 -timsStamp2 -timeStampX" - Read tags' modified history data based on various time stamps<p>
+   
+   JSON returns {"HDA":[{"tagID1":[{"v":"24201","t":1665632091231,"q":262336}, {"v":"19168","t":1665632092354,"q":262336},...]}, {"tagID2":[{"v":"24","t":1665632091341,"q":262336}, {"v":"168","t":1665632092321,"q":262336},...]}]}<br>(v - value, t - time stamp in milliseconds of epoch UTC, q - quality which need be parsed with OPC HDA and DA masks to have results like Raw/Interpolated and Good/Bad)<p>
    
 7. Disconnect<p>
    "disconnect" - Close connection with server<p>
@@ -141,8 +146,8 @@ https://user-images.githubusercontent.com/13662339/200226922-060a4473-e3ec-4900-
 <img src="https://user-images.githubusercontent.com/13662339/211081301-6a2e0475-383f-43d4-9fff-a66a9a094c04.png" width=70%>
 
 <h2>Roadmap</h2>
-- More HDA features available upon request<br>
-- Full-fledged open source native client for iOS<br>
+- More HDA features coming soon upon request<br>
+- Full-fledged open source native client for iOS and partners/contributors are welcome<br>
 
 <h2>Related contribution</h2>
 <a href="https://github.com/duduyoyo/OLEDB4OPC">OLEDB4OPC</a>, the fastest way to transfer OPC data to database!
