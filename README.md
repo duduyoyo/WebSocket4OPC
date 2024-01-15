@@ -37,81 +37,87 @@ Run command "uninstall.bat" in command line with administrator privilege in your
 
 <h2>Usage</h2><p>
       
-1. Browse<p>
-   There are two sets of browse commands for DA and HDA servers respectively.<p>
+1. DA commands<p>
+1.1 Browse<p>
    "browse" - Show all child tags under top level of DA server<p>
-   "browseHDA" - Show all child tags under top level of HDA server<p>
    "browse:tagID" - Show all child tags under a parent tag of DA server<p>
-   "browseHDA:tagID" - Show all child tags under a parent tag of HDA server<p>
-   "browse:tagID -countsInPagenation -pageNumber" - Show a limited number of child tags in pagenation under a parent tag of DA server. For example there are 10,000 child tags available under a specific tag and command "browse: tagID -2000 -3" will display 2000 child tags from 4000th to 5999th to correspond to page 3 in DA server<p>
-    "browseHDA:tagID -countsInPagenation -pageNumber" - Show a limited number of child tags in pagenation under a parent tag of HDA server. For example there are 10,000 child tags available under a specific tag and command "browseHDA: tagID -2000 -3" will display 2000 child tags from 4000th to 5999th to correspond to page 3 in HDA server<p>
+   "browse:tagID -countsInPagenation -pageNumber" - Show a subset of children tags based on pagenation under a specific tag in DA server. For example, if there are total 10,000 children tags under a specific tag, command "browse: tagID -2000 -3" will only display a tag's 2000 children tags (4000th to 5999th) for 3rd page in DA server<p>
+    
    JSON returns {"parentNodeID":[{"n": "tagName1", "i": "tagID1", "b": 1}, {"n": "tagName2", "i": "tagID2", "b": 0}, ...]}<br>(parentNodeID - parent node id or "" at top level, n - name, i - ID, b - branch)<p>
-    When "browse: Random" command is sent response will be like,<p>
+    When command "browse: Random" is sent, response will be like<p>
     <img src="https://user-images.githubusercontent.com/13662339/193419607-97d11de8-4116-4b0e-a767-e8c810c4ce01.png" width=70%><p>
-    When "browseHDA: Random" command is sent response will be like,<p>
-    <img src="https://user-images.githubusercontent.com/13662339/198896314-9b2dd8cb-6d62-4c78-9aaa-e4dbe4df2a46.png" width=70%>
-
-2. Read/write/subscribe operations in DA server<p>
-  2.1<p>
+1.2 Read<p> 
    "read: tagID1, tagID2, ..."- Read tag latest values from DA server<p>
 
    JSON returns {"DA":[{"i": "tagID1", "v": "20.308", "t": 1643759756112, "q": 192}, {"i": "tagID2", "v": "4", "t": 1643769859342, "q": 192}, ...]}<br>(i - ID, v - value, t - time stamp in milliseconds of epoch UTC, q - quality)<p>
-   When "read: Random.Real4, Random.Int2" command is sent response will be like,<p>
+   When command "read: Random.Real4, Random.Int2" is sent, response will be like<p>
    <img src="https://user-images.githubusercontent.com/13662339/216796465-f2822c20-9ca2-42f6-8e14-c5ce848e43bf.png" width=70%>  
   
-   2.2<p>
-   "write: tagID1 -value1; tagID2 -value2; ..."- Write tag values to DA server. It is strongly NOT recommended being deployed in a production environment if it is Internet accessible. Contact developer to have a version without this command for production use. USE IT AT YOUR OWN RISK!<p>
+   1.3 Write<p>
+   "write: tagID1 -value1; tagID2 -value2; ..."- Write tag values to DA server. It is strongly recommended NOT to use this command in a production environment when Internet access is available. Contact developer to have a version without this command for production use.<p>
 
    No JSON return but writing status (success/failure) will be reported as info. Use read command to verify writing's success<p>
-   When "write: Bucket Brigade.Int2 -34; Random.Int2 -12" command is sent response will be like,<p>
+   When command "write: Bucket Brigade.Int2 -34; Random.Int2 -12" is sent, response will be like<p>
    <img src="https://user-images.githubusercontent.com/13662339/232327090-7744a9be-3300-4b00-a6f7-e7c2f5b23216.png" width=70%>
   
-   2.3<p>
+   1.4 Subscribe<p>
    "subscribe: tagID1, tagID2, ..." - Add monitored tags to DA server and receive updates when new values are available<p>
 
    JSON returns {"DA":[{"i": "tagID1", "v": "20.308", "t": 1643759756112, "q": 192}, {"i": "tagID2", "v": "4", "t": 1643769859342, "q": 192}, ...]}<br>(i - ID, v - value, t - time stamp in milliseconds of epoch UTC, q - quality)<p>
-   When "subscribe:Saw-toothed Waves.Int1,Saw-toothed Waves.Int2" command is sent response will be like,<p>
+   When command "subscribe:Saw-toothed Waves.Int1,Saw-toothed Waves.Int2" is sent, response will be like<p>
    <img src="https://user-images.githubusercontent.com/13662339/210925641-7eea7071-05e7-4c13-a9ef-527aa38e79da.png" width=70%>
-         
-3. Unsubscribe tags from DA server<p>
+
+   1.5 Unsubscribe<p>
    "unsubscribe" - Remove all monitored tags from DA server<p>
    "unsubscribe: tagID1, tagID2, ..." - Remove specific monitored tags from DA server<p>
-         
-4. Subscribe to AE server<p>
-   "subscribeAE" - Receive notification on alarms and events<p>
-
-   JSON returns {"AE":[{"s":"tagName1","m":"tagName1 Deviation is Low","c":"DEVIATION","sc":"LO","t":1643760803334,"q":192,"tp":4,"ec":2,"st":200,"a":1,"at":""}, {"s":"tagName2","m":"tagName2 Limit is Normal","c":"PVLEVEL","sc":"HIHI","t":1643760808112,"q":192,"tp":4,"ec":1,"st":500,"a":1,"at":""}]}<br>(s - source, m - message, c - condition, sc - sub condition, t - time stamp in milliseconds of epoch UTC, q - quality, tp - type, ec - category, st - severity, a - acknowledgement, at - actor)<p>
-   When "subscribeAE" command is sent response will be like,<p>
-   <img src="https://user-images.githubusercontent.com/13662339/210926438-3cd533e3-a4d7-40e0-85c9-2e53ad57b11c.png" width=70%>
-         
-5. Unsubscribe from AE server<p>
-   "unsubscribeAE" - Remove notification on alarms and events<p>
-         
-6. Read/insert/replace/delete operations in HDA server<p>
-  6.1<p>
-   "readRaw: tagID1, tagID2 -startTimeStamp -endTimeStamp" - Read tags' history raw data based on start and end time stamps<p>
+   
+2. HDA commands<p>
+2.1 Browse<p>
+  "browseHDA" - Show all child tags under top level of HDA server<p>
+  "browseHDA:tagID" - Show all child tags under a specific tag of HDA server<p>
+  "browseHDA:tagID -countsInPagenation -pageNumber" - Show a subset of children tags based on pagenation for a specific tag in HDA server. For example, if there are total 10,000 children tags under a specific tag, command "browseHDA: tagID -2000 -3" will only display a tag's 2000 children tags (4000th to 5999th) for 3rd page in HDA server.<p> 
+  JSON returns {"parentNodeID":[{"n": "tagName1", "i": "tagID1", "b": 1}, {"n": "tagName2", "i": "tagID2", "b": 0}, ...]}<br>(parentNodeID - parent node id or "" at top level, n - name, i - ID, b - branch)<p>
+  When command "browseHDA: Random" is sent, response will be like<p><img src="https://user-images.githubusercontent.com/13662339/198896314-9b2dd8cb-6d62-4c78-9aaa-e4dbe4df2a46.png" width=70%><p>
+  2.2 ReadRaw<p>
+   "readRaw: tagID1, tagID2,..., tagIDx -startTimeStamp -endTimeStamp" - Read tags' history raw data based on start and end time stamps<p>
   
    JSON returns {"HDA":[{"tagID1":[{"v":"24201","t":1665632091123,"q":262336}, {"v":"19168","t":1665632092334,"q":262336},...]}, {"tagID2":[{"v":"24","t":1665632091445,"q":262336}, {"v":"168","t":1665632092667,"q":262336},...]}]}<br>(v - value, t - time stamp in milliseconds of epoch UTC, q - quality which need be parsed with OPC HDA and DA masks to have results like Raw/Interpolated and Good/Bad)<p>
-   When "readRaw: Saw-toothed Waves.Int1,Saw-toothed Waves.Int2 -1672977528112 -1672977529338" command is sent response will be like,<p>
-   <img src="https://user-images.githubusercontent.com/13662339/210927710-843e6bb5-47c1-4d6b-a63b-5c6a384c1359.png" width=70%>
-         
-    6.2<p>
+   When command "readRaw: Saw-toothed Waves.Int1,Saw-toothed Waves.Int2 -1672977528112 -1672977529338" is sent, response will be like<p>
+   <img src="https://user-images.githubusercontent.com/13662339/210927710-843e6bb5-47c1-4d6b-a63b-5c6a384c1359.png" width=70%><p>
+
+   2.3 ReadAtTime<p>
    "readAtTime: tagID1, tagID2, ..., tagIDx -timeStamp1 -timsStamp2 -timeStampX" - Read tags' history data based on various time stamps<p>
    
    JSON returns {"HDA":[{"tagID1":[{"v":"24201","t":1665632091231,"q":262336}, {"v":"19168","t":1665632092354,"q":262336},...]}, {"tagID2":[{"v":"24","t":1665632091341,"q":262336}, {"v":"168","t":1665632092321,"q":262336},...]}]}<br>(v - value, t - time stamp in milliseconds of epoch UTC, q - quality which need be parsed with OPC HDA and DA masks to have results like Raw/Interpolated and Good/Bad)<p>
    
-   When "readAtTime: Saw-toothed Waves.Int1,Saw-toothed Waves.Int2 -1672978265112 -1672978266338" command is sent response will be like,<p>
-   <img src="https://user-images.githubusercontent.com/13662339/210928806-418d44af-c09f-4819-a27b-50450af92e00.png" width=70%>
+   When command "readAtTime: Saw-toothed Waves.Int1,Saw-toothed Waves.Int2 -1672978265112 -1672978266338" is sent, response will be like<p>
+   <img src="https://user-images.githubusercontent.com/13662339/210928806-418d44af-c09f-4819-a27b-50450af92e00.png" width=70%><p>
 
-   6.3<p>
-   "readModified: tagID1, tagID2, ..., tagIDx -timeStamp1 -timsStamp2 -timeStampX" - Read tags' modified history data based on various time stamps<p>
+   2.4 readModified<p>
+   "readModified: tagID1, tagID2,..., tagIDx -startTimeStamp -endTimeStamp" - Read tags' modified history data based on start and end time stamps<p>
+   
+   JSON returns {"HDA":[{"tagID1":[{"v":"24201","t":1665632091231,"q":262336}, {"v":"19168","t":1665632092354,"q":262336},...]}, {"tagID2":[{"v":"24","t":1665632091341,"q":262336}, {"v":"168","t":1665632092321,"q":262336},...]}]}<br>(v - value, t - time stamp in milliseconds of epoch UTC, q - quality which need be parsed with OPC HDA and DA masks to have results like Raw/Interpolated and Good/Bad)<p>
+
+   2.5 ReadProcessed<p>
+   "readProcessed: tagID1, tagID2,..., tagIDx -startTimeStamp -endTimeStamp -intervalInMilliseconds -aggregate" - Read tags' history processed data based on start and end time stamps at an interval for an aggregate feature<p>
    
    JSON returns {"HDA":[{"tagID1":[{"v":"24201","t":1665632091231,"q":262336}, {"v":"19168","t":1665632092354,"q":262336},...]}, {"tagID2":[{"v":"24","t":1665632091341,"q":262336}, {"v":"168","t":1665632092321,"q":262336},...]}]}<br>(v - value, t - time stamp in milliseconds of epoch UTC, q - quality which need be parsed with OPC HDA and DA masks to have results like Raw/Interpolated and Good/Bad)<p>
    
-7. Disconnect<p>
+   When command "readProcessed: random.Int1,random.Int4 -1705350325000 -1705350425000 -5000  -10" is sent, response will be like<p>
+   <img src="https://github.com/duduyoyo/WebSocket4OPC/assets/13662339/87da231e-ea59-40bf-8706-8bb9185ced1e" width=70%><p>
+3. AE commands<p>
+   3.1 Subscribe<p>
+   "subscribeAE" - Receive notification on alarms and events<p>
+   JSON returns {"AE":[{"s":"tagName1","m":"tagName1 Deviation is Low","c":"DEVIATION","sc":"LO","t":1643760803334,"q":192,"tp":4,"ec":2,"st":200,"a":1,"at":""}, {"s":"tagName2","m":"tagName2 Limit is Normal","c":"PVLEVEL","sc":"HIHI","t":1643760808112,"q":192,"tp":4,"ec":1,"st":500,"a":1,"at":""}]}<br>(s - source, m - message, c - condition, sc - sub condition, t - time stamp in milliseconds of epoch UTC, q - quality, tp - type, ec - category, st - severity, a - acknowledgement, at - actor)<p>
+   When command "subscribeAE" is sent, response will be like<p>
+   <img src="https://user-images.githubusercontent.com/13662339/210926438-3cd533e3-a4d7-40e0-85c9-2e53ad57b11c.png" width=70%><p>
+   3.2 Unsubscribe<p>
+   "unsubscribeAE" - Remove notification on alarms and events<p>
+   
+4. Disconnect<p>
    "disconnect" - Close connection with server<p>
          
-8. Help<p>
+5. Help<p>
    "help" or "?" - Display all supported commands and usages<p>
          
 <h2>Sample code output</h2>
