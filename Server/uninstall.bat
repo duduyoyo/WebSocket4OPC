@@ -33,5 +33,9 @@ rmdir /S /Q %rootPath%\OPC
 IF exist OPCModule.dll (
 del /Q OPCModule.dll
 )
+ 
+IF exist %ProgramData%\WebSocket4OPC (
+rmdir /S /Q %ProgramData%\WebSocket4OPC
+)
 
 popd

@@ -106,6 +106,12 @@ ECHO Add OPC handler failed. Make sure OPC module available and %site%/OPC exist
 GOTO :BLANK
 )
 
+xcopy /Y /Q %currentPath%\config.xml %ProgramData%\WebSocket4OPC\
+IF NOT %errorlevel% == 0 (
+ECHO Copying %currentPath%\config.xml to %ProgramData%\WebSocket4OPC\ failed. Check your folder and privilege.
+GOTO :BLANK
+)
+
 GOTO :DONE
 :BLANK
 ECHO usage: install.bat userAccount userPassword
