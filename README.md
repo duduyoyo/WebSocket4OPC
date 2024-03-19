@@ -105,6 +105,16 @@ Run command "uninstall.bat" in command line with administrator privilege in your
    
    When command "readProcessed: random.Int1,random.Int4 -1705350325000 -1705350425000 -5000  -10" is sent, response will be like<p>
    <img src="https://github.com/duduyoyo/WebSocket4OPC/assets/13662339/87da231e-ea59-40bf-8706-8bb9185ced1e" width=70%><p>
+
+    2.6 InsertReplace<p>
+   "insertReplace: tagID1 -value -timeStamp -quality;tagID2 -value -timeStamp -quality;..." - Insert or replace tags' history data and quality for specific time stamps in epoch milliseconds<p>
+   
+   No JSON returns except an operation status message<p>
+   
+   When command "insertReplace: Bucket Brigade.Int1 -234 -1710719956000 -192; Bucket Brigade.Int4 -567 -1710720852000 -192" is sent, response will be like<p>
+   <img src="https://github.com/duduyoyo/WebSocket4OPC/assets/13662339/d0dbe3ef-aad0-467a-97c9-9d40b4414709" width=70%><p>  
+
+   
 3. AE commands<p>
    3.1 Subscribe<p>
    "subscribeAE" - Receive notification on alarms and events<p>
