@@ -1,8 +1,8 @@
 # WebSocket4OPC
 Enable WebSocket in OPC DA/AE/HDA Server with JSON return, FIRST TIME ever!
 
-DCOM was developed more than 2 decades ago, which was the pillar of classic OPC. Young kids today love dynamical languages (JavaScript/Python etc) due to their simplicity. They are reluctunt to get their feet wet on the legacy DCOM technology. Luckily with the popular adoption of WebSocket in most modern programming languages, it possible to glue dynamical languages and legacy DCOM together.<p>
-This revolutionary solution, WebSocket4OPC, brings unparalleled experience to your desktop and mobile device. It utilizes WebSocket as network transportation layer in its full duplex. Comparing with DCOM's RPC protocol WebSocket is much easy to use and more efficient. With the built-in WebSocket feature in Microsoft IIS OPC data becomes accessible safely and securely through Internet. It is time to say, GoodBye DCOM! 
+DCOM was developed more than 2 decades ago, which was the pillar of classic OPC. Nowadays people embrace for dynamical languages (JavaScript/Python etc) due to their simplicity and are reluctunt to get their feet wet on this legacy DCOM technology. Luckily with the popular adoption of WebSocket in most modern programming languages, it is possible to glue dynamical languages and legacy DCOM together.<p>
+This first time ever solution, WebSocket4OPC, brings unparalleled experience to your desktop and mobile device. It utilizes WebSocket as network transportation layer in its full duplex. Comparing with DCOM's RPC protocol, WebSocket is much easy to use and more efficient. With the built-in WebSocket feature with Microsoft IIS, OPC data becomes accessible safely and securely through Internet. It is time for OPC to say, GoodBye DCOM! 
 
 <h2>Benefits</h2>
 
@@ -31,6 +31,8 @@ Download all files from server folder to your desired one. Launch a command line
 
 To verify, launch browser (Chrome/Safari/Edge) and enter URL "http://localhost/OPC/websocket.html"<p>
 <img src="https://user-images.githubusercontent.com/13662339/199052370-58d084ef-170e-4d40-87d0-295766d36b43.png" width=70%>
+
+If installed in a multiple server environment, a config file under program data folder is available to specify your desired server based on its prog ID<p>
 
 <h2>Uninstallation</h2>
 Run command "uninstall.bat" in command line with administrator privilege in your download folder.
@@ -114,8 +116,15 @@ Run command "uninstall.bat" in command line with administrator privilege in your
    When command "insertReplace: Bucket Brigade.Int1 -234 -1710719956000 -192; Bucket Brigade.Int4 -567 -1710720852000 -192" is sent, response will be like<p>
    <img src="https://github.com/duduyoyo/WebSocket4OPC/assets/13662339/d0dbe3ef-aad0-467a-97c9-9d40b4414709" width=70%><p>  
 
+   2.7 DeleteAtTime<p>
+   "deleteAtTime: tagID1, tagID2,..., tagIDX -timeStamp1 -timeStamp2 ... -timeStampX" - Delete tags' history data based on various time stamps in epoch milliseconds<p>
    
-3. AE commands<p>
+   No JSON returns except an operation status message<p>
+   
+   When command "deleteAtTime: Write Error.Int1, Bucket Brigade.Int1 -1713118247000 -1713116556000" is sent, response will be like<p>
+   <img src="https://github.com/duduyoyo/WebSocket4OPC/assets/13662339/14734cd4-f60c-42f6-ab43-ceb74470020e" width=70%><p>
+      
+4. AE commands<p>
    3.1 Subscribe<p>
    "subscribeAE" - Receive notification on alarms and events<p>
    JSON returns {"AE":[{"s":"tagName1","m":"tagName1 Deviation is Low","c":"DEVIATION","sc":"LO","t":1643760803334,"q":192,"tp":4,"ec":2,"st":200,"a":1,"at":""}, {"s":"tagName2","m":"tagName2 Limit is Normal","c":"PVLEVEL","sc":"HIHI","t":1643760808112,"q":192,"tp":4,"ec":1,"st":500,"a":1,"at":""}]}<br>(s - source, m - message, c - condition, sc - sub condition, t - time stamp in milliseconds of epoch UTC, q - quality, tp - type, ec - category, st - severity, a - acknowledgement, at - actor)<p>
@@ -124,10 +133,10 @@ Run command "uninstall.bat" in command line with administrator privilege in your
    3.2 Unsubscribe<p>
    "unsubscribeAE" - Remove notification on alarms and events<p>
    
-4. Disconnect<p>
+5. Disconnect<p>
    "disconnect" - Close connection with server<p>
          
-5. Help<p>
+6. Help<p>
    "help" or "?" - Display all supported commands and usages<p>
          
 <h2>Sample code output</h2>
@@ -162,7 +171,6 @@ https://user-images.githubusercontent.com/13662339/200226922-060a4473-e3ec-4900-
 <img src="https://user-images.githubusercontent.com/13662339/211081301-6a2e0475-383f-43d4-9fff-a66a9a094c04.png" width=70%>
 
 <h2>Roadmap</h2>
-- More HDA features coming soon upon request<br>
 - Full-fledged open source native client for iOS and partners/contributors are welcome<br>
 
 <h2>Related contribution</h2>
