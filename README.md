@@ -1,15 +1,17 @@
 # WebSocket4OPC
 Enable WebSocket in OPC DA/AE/HDA Server with JSON return, FIRST TIME ever!
 
-DCOM was developed more than 2 decades ago, which was the pillar of classic OPC. Nowadays people embrace for dynamical languages (JavaScript/Python etc) due to their simplicity and are reluctunt to get their feet wet on this legacy DCOM technology. Luckily with the popular adoption of WebSocket in most modern programming languages, it is possible to glue dynamical languages and legacy DCOM together.<p>
-This first time ever solution, WebSocket4OPC, brings unparalleled experience to your desktop and mobile device. It utilizes WebSocket as network transportation layer in its full duplex. Comparing with DCOM's RPC protocol, WebSocket is much easy to use and more efficient. With the built-in WebSocket feature with Microsoft IIS, OPC data becomes accessible safely and securely through Internet. It is time for OPC to say, GoodBye DCOM! 
+DCOM was developed more than 2 decades ago, which was the pillar of classic OPC. Nowadays people embrace for dynamical languages (JavaScript/Python etc) due to their simplicity and refuse to be trapped in DCOM configuration hell. Luckily with the popular adoption of WebSocket by most modern programming languages, it is possible to glue dynamical languages and legacy DCOM together.<p>
+This first time ever and ultimate solution, WebSocket4OPC, brings unparalleled experience to your desktop and mobile device. It utilizes WebSocket as network transportation layer with its full duplex feature. Comparing with DCOM's RPC protocol, WebSocket is much easy to use and more efficient. With the built-in WebSocket feature in Microsoft IIS, OPC data becomes accessible safely and securely through Internet. It is time for classic OPC to say GoodBye to DCOM! 
 
 <h2>Benefits</h2>
 
 .No DCOM when connecting to a classic OPC server<br>
 .No future DCOM vulnerability or hardening to worry<br>
 .Support dynamical languages (JavaScript/Python etc)<br>
-.Standard JSON return<br>
+.Standard JSON data return<br>
+.No expensive corporate membership fee<br>
+.No OPC SDK needed<br>
 .Intuitive and easy-to-remember commands instead of long REST API URL<br>
 .Built-in account authentication by IIS<br>
 .Built-in secure connection by IIS<br>
@@ -17,6 +19,7 @@ This first time ever solution, WebSocket4OPC, brings unparalleled experience to 
 .No tedious 1250-page OPC UA documents to consult<br>
 .No OPC UA certificate configuration<br>
 .No OPC UA firewall configuration<br>
+.No OPC DA->UA conversion needed<br>
 .Cross-platform in client gurantted(Linux/Mac/Windows)<br>
 .Edge or Gateway deployment ready without any expensive custom hardware<br> 
 
