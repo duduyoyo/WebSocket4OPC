@@ -2,19 +2,23 @@
 Enable WebSocket in OPC DA/AE/HDA Server with JSON return, FIRST TIME ever!
 
 DCOM was developed more than 2 decades ago, which was the pillar of classic OPC. Nowadays people embrace for dynamical languages (JavaScript/Python etc) due to their simplicity and refuse to be trapped in DCOM configuration hell. Luckily with the popular adoption of WebSocket by most modern programming languages, it is possible to glue dynamical languages and legacy DCOM together.<p>
-This first time ever and ultimate solution, WebSocket4OPC, brings unparalleled experience to your desktop and mobile device. It utilizes WebSocket as network transportation layer with its full duplex feature. Comparing with DCOM's RPC protocol, WebSocket is much easy to use and more efficient. With the built-in WebSocket feature in Microsoft IIS, OPC data becomes accessible safely and securely through Internet. It is time for classic OPC to say GoodBye to DCOM! 
+This innovative solution is a perfect combination of all its tech stack's advantages as below,<p>
+    1. WebSocket (standard network protocol for cross-platform)<br>
+    2. Microsoft IIS (authorization/authentication/firewall/certificate)<br>
+    3. Classic OPC (the most widely adopted industry interfaces)<p>
+Comparing with OPC UA, is there any piece missing? Not all but simple, fast and straightforward. OPC data can be accessed safely and securely through Internet. Unparalleled experience to your desktop and mobile device is around the corner. Say GoodBye to DCOM!
 
 <h2>Benefits</h2>
 
+.Worldwide the exclusive solution to access AE/HDA data in Python/JavaScript<br>
 .No DCOM when connecting to a classic OPC server<br>
 .No future DCOM vulnerability or hardening to worry<br>
 .Support dynamical languages (JavaScript/Python etc)<br>
-.Standard JSON data return<br>
 .No expensive corporate membership fee<br>
-.No OPC SDK needed<br>
+.No OPC or 3rd party SDK needed<br>
 .Intuitive and easy-to-remember commands instead of long REST API URL<br>
-.Built-in account authentication by IIS<br>
-.Built-in secure connection by IIS<br>
+.Built-in account authorization and authentication by IIS<br>
+.Built-in secure connection with certificate by IIS<br>
 .Native mobile APP development feasible<br>
 .No tedious 1250-page OPC UA documents to consult<br>
 .No OPC UA certificate configuration<br>
