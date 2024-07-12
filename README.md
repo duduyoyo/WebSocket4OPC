@@ -3,7 +3,7 @@ Enable WebSocket in OPC DA/AE/HDA Server with JSON return, FIRST TIME ever!
 
 DCOM was developed more than 2 decades ago, which was the pillar of classic OPC. Nowadays people embrace for dynamical languages (JavaScript/Python etc) due to their simplicity and refuse to be trapped in DCOM configuration hell. Luckily with the popular adoption of WebSocket by most modern programming languages, it is possible to glue dynamical languages and legacy DCOM together.<p>
 This innovative solution is a perfect combination of all its tech stack's advantages as below,<p>
-    1. WebSocket (standard network protocol for cross-platform)<br>
+    1. WebSocket (standard network protocol for cross-platform/full duplex)<br>
     2. Microsoft IIS (authorization/authentication/firewall/certificate)<br>
     3. Classic OPC (the most widely adopted industry interfaces)<p>
 Comparing with OPC UA, is there any piece missing? Not all but simple, fast and straightforward. OPC data can be accessed safely and securely through Internet. Unparalleled experience to your desktop and mobile device is around the corner. Say GoodBye to DCOM!
@@ -108,8 +108,9 @@ Run command "uninstall.bat" in command line with administrator privilege in your
    JSON returns {"HDA":[{"tagID1":[{"v":"24201","t":1665632091231,"q":262336}, {"v":"19168","t":1665632092354,"q":262336},...]}, {"tagID2":[{"v":"24","t":1665632091341,"q":262336}, {"v":"168","t":1665632092321,"q":262336},...]}]}<br>(v - value, t - time stamp in milliseconds of epoch UTC, q - quality which need be parsed with OPC HDA and DA masks to have results like Raw/Interpolated and Good/Bad)<p>
 
    2.5 ReadProcessed<p>
-   "readProcessed: tagID1, tagID2,..., tagIDx -startTimeStamp -endTimeStamp -intervalInMilliseconds -aggregate" - Read tags' history processed data based on start and end time stamps at an interval for an aggregate feature<p>
-   
+   "readProcessed: tagID1, tagID2,..., tagIDx -startTimeStamp -endTimeStamp -intervalInMilliseconds -aggregate" - Read tags' history processed data based on start and end time stamps at a given interval for an aggregate method from the list below(vendor specific aggregate methods not shown)<p>
+   ![image](https://github.com/user-attachments/assets/83a59ef4-5492-403c-9e9c-1e2b94ac3c28)
+
    JSON returns {"HDA":[{"tagID1":[{"v":"24201","t":1665632091231,"q":262336}, {"v":"19168","t":1665632092354,"q":262336},...]}, {"tagID2":[{"v":"24","t":1665632091341,"q":262336}, {"v":"168","t":1665632092321,"q":262336},...]}]}<br>(v - value, t - time stamp in milliseconds of epoch UTC, q - quality which need be parsed with OPC HDA and DA masks to have results like Raw/Interpolated and Good/Bad)<p>
    
    When command "readProcessed: random.Int1,random.Int4 -1705350325000 -1705350425000 -5000  -10" is sent, response will be like<p>
