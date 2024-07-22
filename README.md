@@ -1,45 +1,46 @@
 # WebSocket4OPC
 Enable WebSocket in OPC DA/AE/HDA Server with JSON return, FIRST TIME ever!
 
-DCOM was developed more than 2 decades ago, which was the pillar of classic OPC. Nowadays people embrace for dynamical languages (JavaScript/Python etc) due to their simplicity and refuse to be trapped in DCOM configuration hell. Luckily with the popular adoption of WebSocket by most modern programming languages, it is possible to glue dynamical languages and legacy DCOM together.<p>
+COM/DCOM was developed more than 2 decades ago, which was the pillar of classic OPC servers. Nowadays people embrace dynamical languages (Python/JavaScript etc) due to their simplicity and productivity rather than steep-learning-curve COM/DCOM programming. Luckily with the popular adoption of WebSocket in every modern programming language, it is possible to glue dynamical languages and legacy COM/DCOM together.<p>
 This innovative solution is a perfect combination of all its tech stack's advantages as below,<p>
     1. WebSocket (standard network protocol for cross-platform/full duplex)<br>
-    2. Microsoft IIS (authorization/authentication/firewall/certificate)<br>
-    3. Classic OPC (the most widely adopted industry interfaces)<p>
-Comparing with OPC UA, is there any piece missing? Not all but simple, fast and straightforward. OPC data can be accessed safely and securely through Internet. Unparalleled experience to your desktop and mobile device is around the corner. Say GoodBye to DCOM!
+    2. Microsoft IIS (authorization/authentication/firewall/certificate/encryption)<br>
+    3. Classic OPC servers (the most widely adopted industry interfaces)<p>
+Compared to OPC UA, is there any piece missing above? Not all but simple, fast and straightforward. It can't be easier anymore to access classic OPC servers safely and securely with this solution. Unparalleled experience to your desktop and mobile device is ready for you to explore! GoodBye COM/DCOM!
 
 <h2>Benefits</h2>
 
 .Worldwide the exclusive solution to access AE/HDA data in Python/JavaScript<br>
-.No DCOM when connecting to a classic OPC server<br>
+.No any OPC or 3rd party SDK needed<br>
+.No COM/DCOM when connecting to a classic OPC server<br>
 .No future DCOM vulnerability or hardening to worry<br>
-.Support dynamical languages (JavaScript/Python etc)<br>
-.No expensive corporate membership fee<br>
-.No OPC or 3rd party SDK needed<br>
-.Intuitive and easy-to-remember commands instead of long REST API URL<br>
+.Dynamical languages (Python/JavaScript) support<br>
 .Built-in account authorization and authentication by IIS<br>
 .Built-in secure connection with certificate by IIS<br>
+.Built-in data encryption by IIS<br>
+.Cross-platform in client gurantted(Linux/Mac/Windows)<br>
+.No expensive OPC corporate membership fee<br>
+.Intuitive and easy-to-remember commands instead of long REST API URL<br>
 .Native mobile APP development feasible<br>
 .No tedious 1250-page OPC UA documents to consult<br>
 .No OPC UA certificate configuration<br>
 .No OPC UA firewall configuration<br>
 .No OPC DA->UA conversion needed<br>
-.Cross-platform in client gurantted(Linux/Mac/Windows)<br>
 .Edge or Gateway deployment ready without any expensive custom hardware<br> 
 
 <h2>Pre-requiste</h2>
-1. Install in the same server box where classic OPC DA/AE/HDA server is running<br>
-2. WebSocket feature for IIS need be enabled in the same server box<br>
+1. Install in the same server where classic OPC DA/AE/HDA server is running<br>
+2. WebSocket feature for IIS need be enabled in the same server<br>
 3. Microsoft VC++ Runtim for X64 required (download <a href="https://aka.ms/vs/17/release/vc_redist.x64.exe">here</a> and install it if needed)<br>
 
 <h2>Installation</h2>
 
-Download all files from server folder to your desired one. Launch a command line with administrator privilege and enter to your download folder. Run command "install.bat userAccount userPassword" to complete installation. userAccount/userPassword need be replaced with your own Windows account/password and make sure that account has administrator privilege. This account is only used by IIS to configure a new app pool and not used by this solution or stored anywhere else. If you have previous installation, uninstall it first.
+Download all files from server folder to your desired one. Launch a command line with administrator privilege and enter to your download folder. Run command "install.bat userAccount userPassword" to complete installation. userAccount/userPassword need be your own Windows credential and make sure that it has administrator privilege. This credential is only used by IIS in configuring a new app pool and not used by this solution or stored anywhere else.
 
 To verify, launch browser (Chrome/Safari/Edge) and enter URL "http://localhost/OPC/websocket.html"<p>
 <img src="https://user-images.githubusercontent.com/13662339/199052370-58d084ef-170e-4d40-87d0-295766d36b43.png" width=70%>
 
-If installed in a multiple server environment, a config file under program data folder is available to specify your desired server based on its prog ID<p>
+If installed in a multiple server environment, a config file under program data folder is available to specify your desired server with its prog ID<p>
 
 <h2>Uninstallation</h2>
 Run command "uninstall.bat" in command line with administrator privilege in your download folder.
@@ -102,7 +103,7 @@ Run command "uninstall.bat" in command line with administrator privilege in your
    When command "readAtTime: Saw-toothed Waves.Int1,Saw-toothed Waves.Int2 -1672978265112 -1672978266338" is sent, response will be like<p>
    <img src="https://user-images.githubusercontent.com/13662339/210928806-418d44af-c09f-4819-a27b-50450af92e00.png" width=70%><p>
 
-   2.4 readModified<p>
+   2.4 ReadModified<p>
    "readModified: tagID1, tagID2,..., tagIDx -startTimeStamp -endTimeStamp" - Read tags' modified history data based on start and end time stamps<p>
    
    JSON returns {"HDA":[{"tagID1":[{"v":"24201","t":1665632091231,"q":262336}, {"v":"19168","t":1665632092354,"q":262336},...]}, {"tagID2":[{"v":"24","t":1665632091341,"q":262336}, {"v":"168","t":1665632092321,"q":262336},...]}]}<br>(v - value, t - time stamp in milliseconds of epoch UTC, q - quality which need be parsed with OPC HDA and DA masks to have results like Raw/Interpolated and Good/Bad)<p>
@@ -132,7 +133,7 @@ Run command "uninstall.bat" in command line with administrator privilege in your
    When command "deleteAtTime: Write Error.Int1, Bucket Brigade.Int1 -1713118247000 -1713116556000" is sent, response will be like<p>
    <img src="https://github.com/duduyoyo/WebSocket4OPC/assets/13662339/14734cd4-f60c-42f6-ab43-ceb74470020e" width=70%><p>
       
-4. AE commands<p>
+3. AE commands<p>
    3.1 Subscribe<p>
    "subscribeAE" - Receive notification on alarms and events<p>
    JSON returns {"AE":[{"s":"tagName1","m":"tagName1 Deviation is Low","c":"DEVIATION","sc":"LO","t":1643760803334,"q":192,"tp":4,"ec":2,"st":200,"a":1,"at":""}, {"s":"tagName2","m":"tagName2 Limit is Normal","c":"PVLEVEL","sc":"HIHI","t":1643760808112,"q":192,"tp":4,"ec":1,"st":500,"a":1,"at":""}]}<br>(s - source, m - message, c - condition, sc - sub condition, t - time stamp in milliseconds of epoch UTC, q - quality, tp - type, ec - category, st - severity, a - acknowledgement, at - actor)<p>
@@ -141,10 +142,10 @@ Run command "uninstall.bat" in command line with administrator privilege in your
    3.2 Unsubscribe<p>
    "unsubscribeAE" - Remove notification on alarms and events<p>
    
-5. Disconnect<p>
+4. Disconnect<p>
    "disconnect" - Close connection with server<p>
          
-6. Help<p>
+5. Help<p>
    "help" or "?" - Display all supported commands and usages<p>
          
 <h2>Sample code output</h2>
