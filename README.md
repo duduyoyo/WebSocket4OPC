@@ -30,8 +30,9 @@ Compared to OPC UA, is there any piece missing above? Not all but simple, fast a
 
 <h2>Pre-requiste</h2>
 1. Install in the same server where classic OPC DA/AE/HDA server is running<br>
-2. WebSocket feature for IIS need be enabled in the same server<br>
-3. Microsoft VC++ Runtim for X64 required (download <a href="https://aka.ms/vs/17/release/vc_redist.x64.exe">here</a> and install it if needed)<br>
+2. Microsoft VC++ Runtim for X64 required (download <a href="https://aka.ms/vs/17/release/vc_redist.x64.exe">here</a> and install it if needed)<br>
+3. WebSocket feature for IIS need be enabled in the same server<br>
+<img src="https://github.com/user-attachments/assets/52ab03a5-b36c-4cca-ba64-d4ad9315926b" width=30%>
 
 <h2>Installation</h2>
 
@@ -183,4 +184,5 @@ https://user-images.githubusercontent.com/13662339/200226922-060a4473-e3ec-4900-
 - Full-fledged open source native client for iOS and partners/contributors are welcome<br>
 
 <h2>Related contribution</h2>
-<a href="https://github.com/duduyoyo/OLEDB4OPC">OLEDB4OPC</a>, the fastest way to transfer OPC data to database!
+<a href="https://github.com/duduyoyo/OLEDB4OPC">OLEDB4OPC</a>, the fastest way to transfer OPC data to database!<p>
+<a href="https://github.com/duduyoyo/WebSocket4Fragment">WebSocket4Fragment</a>, a unique way to handle WebSocket fragment explicitly in run time!
