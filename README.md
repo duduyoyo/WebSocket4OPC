@@ -24,10 +24,11 @@ Say goodbye to COM/DCOM — and Hello to the world's only all-in-one solution fo
 .No OPC UA certificate setup required<br>
 .No OPC UA firewall configuration needed<br>
 .No need to convert OPC DA to OPC UA, purely plant data delivered<br>
+.Remote host supported for Windows XP/7 (server 2003/2008) when WebSocket feature isn't available<br>
 .Ready for edge or gateway deployment - locally or remotely, no expensive custom hardware needed<br>
 
 <h2>Pre-requiste</h2>
-1. It is strongly recommended to install the application on the same server where the classic OPC DA/AE/HDA server is running. If this is not feasible, the application can be installed on any compatible Windows machine with remote access to the OPC server. In such cases, a host entry must be configured in the configuration file located in the ProgramData folder<br>
+1. It is strongly recommended to install the application on the same server where the classic OPC DA/AE/HDA server is running. If this is not feasible, the application can be installed on any compatible Windows machine with remote access to the OPC server. In such cases, a host entry must be configured in the configuration file located in the ProgramData folder. Take a <a href="https://github.com/duduyoyo/WebSocket4OPC/discussions/21">reference</a> here <br>
 2. Microsoft VC++ Runtim for X64 is required (download and install it <a href="https://aka.ms/vs/17/release/vc_redist.x64.exe">here</a> if not already present)<br>
 3. Ensure the WebSocket feature is enabled in IIS on the same server<br>
 <img src="https://github.com/user-attachments/assets/2f6bf591-42e3-4dd8-a41f-5e8b122ba1a9" width=30%>
